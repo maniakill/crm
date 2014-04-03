@@ -1,0 +1,15 @@
+<div class="logo">&nbsp;</div>
+<div class="content">
+	<p>Get integrated &#45; Grow your business</p>
+</div>
+<div class="loginForm">
+	<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+	<form>
+		<input type="text" name="username" value="" maxlenght="50" class="text" placeholder="Username" ng-model="username" autocomplete="OFF" autocapitalize="off" autocorrect="off" />
+		<input type="password" name="password" value="" maxlenght="50" class="password" placeholder="Password" ng-model="password" autocomplete="OFF" autocapitalize="off" autocorrect="off" />
+		<input type="submit" class="submit" value="Login" ng-click="fetch()">
+	</form>
+	<div>
+		<a id="forgot" ng-click="openInBrowser()">Can't access your account?</a>
+	</div>
+</div>

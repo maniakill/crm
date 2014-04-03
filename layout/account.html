@@ -1,0 +1,13 @@
+<div ng-include="'layout/header.html'" />
+<div class="logo logo_acount">&nbsp;</div>
+<div class="content">
+	<p>Get integrated &#45; Grow your business</p>
+</div>
+<div class="loginForm">
+	<form>
+		<label>Logged in as</label>
+		<input type="text" name="username" value="" maxlenght="50" class="account" ng-model="username" required />
+		<input type="submit" class="submit" value="Logout" ng-click="logout()">
+	</form>	
+</div>
+<div data-ng-include="'layout/footer.html'" />

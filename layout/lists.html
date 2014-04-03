@@ -1,0 +1,15 @@
+<div ng-include="'layout/header.html'" />
+<div class="scroller">
+	<ul class="lists" ng-hide="projectList" >
+	    <li ng-repeat="item in items" ng-click="open(item.project_id)">
+	        <p>{{ item.project_name }}</p>
+	    	<span>{{ item.customer_name }}</span>
+	    </li>
+	</ul>
+	<ul class="lists" ng-hide="taskList">
+	    <li ng-repeat="task in tasks" ng-click="open(projectId,task.task_id)" class="tasks_list">
+	        <p>{{ task.task_name }}</p>    	
+	    </li>
+	</ul>
+</div>
+<div data-ng-include="'layout/footer.html'" />

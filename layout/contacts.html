@@ -1,0 +1,20 @@
+<div ng-include="'layout/header.html'" />
+<div id="page" class="scroller">
+	<input type="text" ng-model="search"> 
+	<ul>
+		<li ng-repeat="project in projects | filter:search | limitTo:limit" class="projects" ng-click="edit(project.contact_id)">
+			<p class="projectName">{{project.firstname+' '+project.lastname}}</p>
+			<!-- <p class="projectName">{{project.company_name}}</p>
+			<p class="projectName">{{project.email+' '+project.phone}}</p> -->
+		</li>
+	</ul>
+	<div class="no_data" ng-hide="no_project" >
+		<div class="loginForm">
+			<p>No data to display</p>
+			<form>
+				<input type="submit" class="submit" value="Add new task" ng-click="addNewTask()">
+			</form>	
+		</div>
+	</div>
+</div>
+<div data-ng-include="'layout/footer.html'" />

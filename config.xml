@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget 
+    id="eu.salesassist.timetracker" 
+    version="0.0.1" 
+    xmlns="http://www.w3.org/ns/widgets" 
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    xmlns:android   = "http://schemas.android.com/apk/res/android"
+    >
+    <name>SalesAssist TimeTracker</name>
+    <preference name="DisallowOverscroll" value="true" />
+    <!-- <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="BackupWebStorage" value="cloud" />
+    
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="TopActivityIndicator" value="gray" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="SplashScreen" value="splash" />
+    <preference name="SplashScreenDelay" value="10000" /> -->
+    <preference name="LogLevel" value="ERROR"/>
+    <preference name="android-minSdkVersion" value="5" />
+    <preference name="orientation" value="both" />
+    <preference name="phonegap-version" value="3.3.0" />
+    <preference name="fullscreen" value="true" />
+    <preference name="EnableViewportScale" value="false"/>
+    
+    <icon src="icon.png" />
+    <gap:splash src="splash.png" />
+    <gap:splash src="res2/screen/ios/screen-iphone-portrait.png" gap:platform="ios" width="320" height="480" />
+    <gap:splash src="res2/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios" width="640" height="960" />
+    <gap:splash src="res2/screen/ios/screen-iphone-portrait-568h-2x.png" gap:platform="ios" width="640" height="1136" />
+    <gap:splash src="res2/screen/ios/screen-ipad-landscape.png" gap:platform="ios" width="1024" height="748" />
+    <!-- <gap:splash src="res2/screen/ios/screen-ipad-portrait.png" gap:platform="ios" width="768" height="1024" /> -->
+
+    <!-- retina iPad support: PhoneGap 2.5.0+ only -->
+    <gap:splash src="res2/screen/ios/screen-ipad-landscape-2x.png" gap:platform="ios" width="2048" height="1536" />
+    <gap:splash src="res2/screen/ios/screen-ipad-portrait-2x.png" gap:platform="ios" width="1536" height="2048" />
+
+    <gap:splash src="res2/screen/android/android-ldpi.png" gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="res2/screen/android/android-mdpi.png" gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="res2/screen/android/android-hdpi.png" gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="res2/screen/android/android-xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="res2/screen/android/android-xhdpi.png" gap:platform="android" gap:density="xxhdpi" />
+
+
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+    <description>
+        SalesAssist Time Tracker application
+    </description>
+    <author email="marius@medeeaweb.com" href="http://salesassist.eu">
+        ArkWeb Team
+    </author>
+    <gap:plugin name="org.apache.cordova.camera" />
+    <gap:plugin name="org.apache.cordova.media-capture" />
+    <gap:plugin name="org.apache.cordova.media" />
+    <gap:plugin name="org.apache.cordova.network-information" />
+    <gap:plugin name="org.apache.cordova.splashscreen" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <content src="index.html" />
+    <access origin="*" />
+</widget>

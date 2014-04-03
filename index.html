@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="timeT">
+	<head>
+		<title>SalesAssist</title>
+		<meta charset="UTF-8">
+		<!-- css -->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/mobile-css.css">
+		<!-- !css -->
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		<script type="text/javascript" charset="utf-8">
+	    var devReady = false; var	pictureSource; var	destinationType;
+	    function onLoad() { document.addEventListener("deviceready", onDeviceReady, false); }
+	    function onDeviceReady() { devReady = true; pictureSource=navigator.camera.PictureSourceType; destinationType=navigator.camera.DestinationType;
+	    document.addEventListener("backbutton", exitTheApp, false);
+	    }
+	    function exitTheApp(){ navigator.app.exitApp(); }
+	    </script>
+	</head>
+	<body onload="onLoad()">
+		<div ng-view="" ng-class="pageAnimationClass"></div>
+		<!-- javascript -->
+		<script src="js/jquery.js"></script>
+		<script src="js/fastclick.js"></script>
+		<script src="js/angular.js"></script>
+		<script src="js/angular-route.min.js"></script>
+		<script src="js/angular-animate.min.js"></script>
+		<script src="js/bootstrap/ui-bootstrap-custom-tpls-0.10.0.js"></script>
+		<script src="js/timetracker.js"></script>
+		<script src="controller/controller.js"></script>
+		<!-- !javascript -->
+	</body>
+</html>
