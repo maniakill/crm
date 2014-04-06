@@ -66,23 +66,25 @@ ctrl.controller('footer',['$scope','$routeParams','$route','project','$location'
 				$scope.contacts=false;
 				break;
 		}
-		$scope.go = function(href){
-			$location.path('/'+href);
-		}
+		$scope.go = function(href){ $location.path('/'+href); }
 	}
 ]);
 // header
 ctrl.controller('header',['$scope','project','$location','$route',
 	function ($scope,project,$location,$route){
-		var path=$route.current.controller,link = 'contacts';			
+		var path=$route.current.controller,link = 'contacts';
+		$scope.lists = true;
 		switch (path){
 			case 'customerV':
 				link='customers';
+				$scope.lists=false;
+				break;
+			case 'add':
+				link='contacts';
+				$scope.lists=false;
 				break;
 		}
-		$scope.backToList=function(){
-			$location.path('/'+link);
-		}
+		$scope.backToList=function(){ $location.path('/'+link); }
 	}
 ]);
 // contacts
@@ -152,16 +154,13 @@ ctrl.controller('customers',['$scope','project','$location',
 	}
 ])
 // account
-ctrl.controller('account',['$scope', '$location', 'project', '$interval',
-  function ($scope, $location, project,$interval){
+ctrl.controller('account',['$scope','$location','project',
+  function ($scope,$location,project){
     $scope.username = localStorage.username;
     //deleting the database
-    var removeStuff = function (){
-      localStorage.clear();      
-    }
+    var removeStuff = function (){ localStorage.clear(); }
     // removeStuff();
     $scope.logout = function (){
-      // $interval.cancel(project.interval);
       localStorage.setItem('username','');
       localStorage.setItem('token','');
       $location.path('/start');
@@ -171,7 +170,7 @@ ctrl.controller('account',['$scope', '$location', 'project', '$interval',
 // customer View
 ctrl.controller('customerV',['$scope','$routeParams','project',
 	function ($scope,$routeParams,project){
-		var contact = project.getItem($routeParams.id,'customer');		
+		var contact = project.getItem($routeParams.id,'customer');
 		$scope.name=contact.name;
 		$scope.c_email=contact.c_email;
 		$scope.comp_phone=contact.comp_phone;
