@@ -44,16 +44,44 @@ ctrl.controller('login',['$scope','$http','$templateCache','$location','$timeout
 	}
 ]);
 // footer
-ctrl.controller('footer',['$scope', '$routeParams', '$route', '$modal', 'project', '$location',
-	function ($scope, $routeParams, $route, $modal, project,$location){
-		
+ctrl.controller('footer',['$scope','$routeParams','$route','project','$location',
+	function ($scope,$routeParams,$route,project,$location){
+		$scope.contactsAct = '';
+		$scope.contacts = true;
+		$scope.customersAct = '';
+		$scope.customers = true;
+		$scope.accountAct='';
+		$scope.account=true;
+		switch($route.current.controller){
+			case 'customers':
+				$scope.customersAct='act';
+				$scope.customers=false;
+				break;
+			case 'account':
+				$scope.accountAct='act';
+				$scope.account=false;
+				break;
+			default: 
+				$scope.contactsAct='act';
+				$scope.contacts=false;
+				break;
+		}
+		$scope.go = function(href){
+			$location.path('/'+href);
+		}
 	}
 ]);
 // header
-ctrl.controller('header',['$scope','project','$location',
-	function ($scope,project,$location){
+ctrl.controller('header',['$scope','project','$location','$route',
+	function ($scope,project,$location,$route){
+		var path=$route.current.controller,link = 'contacts';			
+		switch (path){
+			case 'customerV':
+				link='customers';
+				break;
+		}
 		$scope.backToList=function(){
-			$location.path('/contacts');
+			$location.path('/'+link);
 		}
 	}
 ]);
@@ -70,25 +98,24 @@ ctrl.controller('contacts',['$scope','$location','project',
 			$scope.offset++;
 			project.getContactsAsArr();
 			if(project.contactArr.length > 0){ $scope.no_project = true; }
-		})
-		// project.deleteData();	
-		// console.log(project.contact);
+		})		
 		$scope.loadMore = function(){
 			if($scope.contacts > $scope.limit){
 				$scope.limit += 30;
 			  project.getContacts($scope.offset).then(function(){
 			  	$scope.offset++;
-					project.getContactsAsArr();        
+					project.getContactsAsArr();
 				})
 			}
 		}
-		$scope.edit=function(id){ $location.path('/add/'+id); }
+		$scope.getName=function(item){return item.firstname+' '+item.lastname;}
+		$scope.edit=function(item){ $location.path('/add/'+item.contact_id); }
   }
 ]);
 // add
 ctrl.controller('add',['$scope','project','$location','$routeParams',
-	function($scope,project,$location,$routeParams){
-		var contact = project.getContact($routeParams.id);		
+	function ($scope,project,$location,$routeParams){
+		var contact = project.getItem($routeParams.id);
 		$scope.firstname=contact.firstname;
 		$scope.lastname=contact.lastname;
 		$scope.email=contact.email;
@@ -96,30 +123,57 @@ ctrl.controller('add',['$scope','project','$location','$routeParams',
 		$scope.company=contact.company_name;
 	}
 ]);
+// customers
+ctrl.controller('customers',['$scope','project','$location',
+	function ($scope,project,$location){
+		$scope.projects = project.customerArr;
+		$scope.limit = 30;
+		$scope.offset = 0;
+		$scope.contacts = 0; 
+		$scope.no_project = false;
+		project.getContacts($scope.offset,'customers_list').then(function(o){
+			$scope.contacts=o.response.max_rows;
+			$scope.offset++;
+			project.getContactsAsArr();
+			if(project.customerArr.length > 0){ $scope.no_project = true; }
+		})
+		// project.deleteData();
+		$scope.loadMore = function(){
+			if($scope.contacts > $scope.limit){
+				$scope.limit += 30;
+			  project.getContacts($scope.offset,'customers_list').then(function(){
+			  	$scope.offset++;
+					project.getContactsAsArr();
+				})
+			}
+		}
+		$scope.getName=function(item){ return item.name;}
+		$scope.edit=function(item){ $location.path('/customerV/'+item.id); }
+	}
+])
 // account
 ctrl.controller('account',['$scope', '$location', 'project', '$interval',
-    function ($scope, $location, project,$interval){
-        $scope.username = localStorage.username;
-
-        //deleting the database
-        var removeStuff = function (){
-            localStorage.setItem('timesheet', '');
-            localStorage.setItem('taskTime', '');
-            localStorage.setItem('taskTimeId', '');
-            localStorage.setItem('expenses', '');
-            localStorage.setItem('toSync', '');
-            localStorage.setItem('customers', '');
-            project.time = {};
-            project.taskTimeId = {};
-            project.taskTime = {};
-        }
-        // removeStuff();
-        $scope.logout = function (){
-            // $interval.cancel(project.interval);
-            localStorage.setItem('username','');
-            localStorage.setItem('token','');
-            // removeStuff(); // this is for testiung only and shall be removed when going live
-            $location.path('/start');
-        }
+  function ($scope, $location, project,$interval){
+    $scope.username = localStorage.username;
+    //deleting the database
+    var removeStuff = function (){
+      localStorage.clear();      
     }
+    // removeStuff();
+    $scope.logout = function (){
+      // $interval.cancel(project.interval);
+      localStorage.setItem('username','');
+      localStorage.setItem('token','');
+      $location.path('/start');
+    }
+  }
 ]);
+// customer View
+ctrl.controller('customerV',['$scope','$routeParams','project',
+	function ($scope,$routeParams,project){
+		var contact = project.getItem($routeParams.id,'customer');		
+		$scope.name=contact.name;
+		$scope.c_email=contact.c_email;
+		$scope.comp_phone=contact.comp_phone;
+	}
+])

@@ -1,11 +1,13 @@
 <div ng-include="'layout/header.html'" />
 <div id="page" class="scroller">
-	<input type="text" ng-model="search"> 
+	<div class="loginForm">
+		<form>
+			<input type="text" ng-model="search" class="account" />
+		</form>
+	</div>
 	<ul>
-		<li ng-repeat="project in projects | filter:search | limitTo:limit" class="projects" ng-click="edit(project.contact_id)">
-			<p class="projectName">{{project.firstname+' '+project.lastname}}</p>
-			<!-- <p class="projectName">{{project.company_name}}</p>
-			<p class="projectName">{{project.email+' '+project.phone}}</p> -->
+		<li ng-repeat="project in projects | filter:search | limitTo:limit" class="projects" ng-click="edit(project)">
+			<p class="projectName">{{getName(project)}}</p>
 		</li>
 	</ul>
 	<div class="no_data" ng-hide="no_project" >

@@ -1,1 +1,29 @@
-<div class="footer" ng-controller="footer"></div>
+<div class="footer" ng-controller="footer">
+	<div class="footers left {{contactsAct}}">
+		<div class="footer_active" ng-hide="contacts">
+			<div class="blur" ></div>
+		</div>
+		<div class="footer_container" ng-click="go('contacts')">
+			<div class="timesheet_footer"></div>
+			<a href="#/contacts" class="footer_link">Contacts</a>
+		</div>
+	</div>
+	<div class="footers left {{customersAct}}">
+		<div class="footer_active" ng-hide="customers">
+			<div class="blur" ></div>
+		</div>
+		<div class="footer_container" ng-click="go('customers')">
+			<div class="expenses_footer"></div>
+			<a href="#/customers" class="footer_link" >Customers</a>
+		</div>
+	</div>
+	<div class="footers left footer_last {{accountAct}}">
+		<div class="footer_active" ng-hide="account">
+			<div class="blur" ></div>
+		</div>
+		<div class="footer_container" ng-click="go('account')" >
+			<div class="account_footer"></div>
+			<a href="#/account" class="footer_link">Account</a>
+		</div>
+	</div>
+</div>
