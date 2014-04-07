@@ -1,17 +1,26 @@
 <div ng-include="'layout/header.html'" />
 <div class="add_wrap scroller">
 	<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
-	<div class="loginForm">
+	<!-- <div class="loginForm">
 		<form>
 			<input ng-hide="mode" type="submit" class="submit" value="Save" ng-click="save()">
 		</form>	
-	</div>
+	</div> -->
 	<ul class="add_ul">
-		<li><div class="labels"><span>First name</span></div><div class="values"><input type="text" value="{{firstname}}" /></div></li>
-		<li><div class="labels"><span>Last name</span></div><div class="values"><input type="text" value="{{lastname}}" /></div></li>
-		<li><div class="labels"><span>Company</span></div><div class="values"><input type="text" value="{{company}}" /></div></li>
-		<li><div class="labels"><span>Phone</span></div><div class="values"><input type="text" value="{{phone}}" /></div></li>
-		<li class="last_li"><div class="labels "><span>Email</span></div><div class="values"><input type="text" value="{{email}}" /></div></li>		
-	</ul>	
+		<li><div class="labels"><span>Details</span></div></li>
+		<li><div class="labels"><span>First name</span></div><div class="values">{{firstname}}</div></li>
+		<li><div class="labels"><span>Last name</span></div><div class="values">{{lastname}}</div></li>
+		<li><div class="labels"><span>Title</span></div><div class="values">{{title}}</div></li>
+		<li><div class="labels"><span>Company</span></div><div class="values"><a href="#/customerV/{{company_id}}">{{company_name}}</a></div></li>
+		<li><div class="labels"><span>Phone</span></div><div class="values"><a href="tel:{{phone}}" target="_blank" >{{phone}} </a></div></li>
+		<li class="last_li"><div class="labels "><span>Email</span></div><div class="values"><a href="mailto:{{email}}" target="_blank" >{{email}}</a></div></li>
+	</ul>
+	<ul class="add_ul second_add_ul" ng-show="address_id">
+		<li><div class="labels"><span>Street</span></div></li>
+		<li><div class="labels"><span>Address</span></div><div class="values">{{address}}</div></li>
+		<li><div class="labels"><span>Zip</span></div><div class="values">{{zip}}</div></li>
+		<li><div class="labels"><span>City</span></div><div class="values">{{city}}</div></li>
+		<li class="last_li"><div class="labels "><span>Country</span></div><div class="values">{{country}}</div></li>
+	</ul>
 </div>
 <div data-ng-include="'layout/footer.html'" />

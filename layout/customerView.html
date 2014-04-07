@@ -1,15 +1,16 @@
 <div ng-include="'layout/header.html'" />
 <div class="add_wrap scroller">
 	<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
-	<div class="loginForm">
+	<!-- <div class="loginForm">
 		<form>
 			<input ng-hide="mode" type="submit" class="submit" value="Save" ng-click="save()">
 		</form>	
-	</div>
+	</div> -->
 	<ul class="add_ul">
+		<li><div class="labels"><span>Details</span></div></li>
 		<li><div class="labels"><span>Name</span></div><div class="values">{{name}}</div></li>
-		<li><div class="labels"><span>Email</span></div><div class="values">{{c_email}}</div></li>
-		<li class="last_li"><div class="labels "><span>Phone</span></div><div class="values">{{comp_phone}}</div></li>		
+		<li><div class="labels"><span>Email</span></div><div class="values"><a href="mailto:{{c_email}}" >{{c_email}}</a></div></li>
+		<li class="last_li"><div class="labels "><span>Phone</span></div><div class="values"><a href="tel:{{comp_phone}}" >{{comp_phone}}</a></div></li>
 	</ul>
 </div>
 <div data-ng-include="'layout/footer.html'" />

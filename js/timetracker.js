@@ -21,12 +21,12 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
       project.customerArr.length = 0;
       angular.forEach(project.contact,function(value,key){
         if(project.contactArr.indexOf(value) == -1){
-          project.contactArr.push(value);  
+          project.contactArr.push(value);
         }
       })
       angular.forEach(project.customer,function(value,key){
         if(project.customerArr.indexOf(value) == -1){
-          project.customerArr.push(value);  
+          project.customerArr.push(value);
         }
       })
     }
@@ -35,7 +35,9 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
       project.customer=localStorage.getItem('customer'+localStorage.username) ? JSON.parse(localStorage.getItem('customer'+localStorage.username)) : {};
       project.contactArr = [];
       project.customerArr = [];
+      console.profile('e');
       project.getContactsAsArr();
+      console.profileEnd();
     }
     init(); 
     var save = function(type, item){
@@ -43,15 +45,11 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
       localStorage.setItem(type+localStorage.username, JSON.stringify(item));
     }
     var saveContact = function(item){
-      if(item.id){
-        var contact={};
-        contact.contact_id=item.id;
-        contact.firstname=item.firstname;
-        contact.lastname=item.lastname;
-        contact.email=item.email;
-        contact.phone=item.phone;
-        contact.company_id=item.company_id;
-        contact.company_name=item.company_name;        
+      if(item.contact_id){
+        var contact={};        
+        for(x in item){
+          contact[x] = item[x];
+        }
         if(contact.company_id!=0 && contact.company_id!=undefined && contact.company_id!='' && !project.customer[contact.company_id]){
           var c={};
           c.name=contact.company_name;
@@ -61,8 +59,8 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
           project.customer[contact.company_id]=c;
           save('customer',project.customer);
         }
-        if(!project.contact[item.id]){ project.contact[item.id]={}; }
-        project.contact[item.id] = contact;
+        if(!project.contact[item.contact_id]){ project.contact[item.contact_id]={}; }
+        project.contact[item.contact_id] = contact;
         save('contact',project.contact);
       }
     }

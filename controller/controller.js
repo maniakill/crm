@@ -54,6 +54,7 @@ ctrl.controller('footer',['$scope','$routeParams','$route','project','$location'
 		$scope.account=true;
 		switch($route.current.controller){
 			case 'customers':
+			case 'customerV':
 				$scope.customersAct='act';
 				$scope.customers=false;
 				break;
@@ -118,11 +119,9 @@ ctrl.controller('contacts',['$scope','$location','project',
 ctrl.controller('add',['$scope','project','$location','$routeParams',
 	function ($scope,project,$location,$routeParams){
 		var contact = project.getItem($routeParams.id);
-		$scope.firstname=contact.firstname;
-		$scope.lastname=contact.lastname;
-		$scope.email=contact.email;
-		$scope.phone=contact.phone;
-		$scope.company=contact.company_name;
+		for(x in contact){
+			$scope[x] = contact[x];
+		}
 	}
 ]);
 // customers
@@ -171,8 +170,8 @@ ctrl.controller('account',['$scope','$location','project',
 ctrl.controller('customerV',['$scope','$routeParams','project',
 	function ($scope,$routeParams,project){
 		var contact = project.getItem($routeParams.id,'customer');
-		$scope.name=contact.name;
-		$scope.c_email=contact.c_email;
-		$scope.comp_phone=contact.comp_phone;
+		for(x in contact){
+			$scope[x] = contact[x];
+		}
 	}
 ])

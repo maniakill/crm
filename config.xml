@@ -8,20 +8,6 @@
     >
     <name>SalesAssist TimeTracker</name>
     <preference name="DisallowOverscroll" value="true" />
-    <!-- <preference name="AllowInlineMediaPlayback" value="false" />
-    <preference name="BackupWebStorage" value="cloud" />
-    
-    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
-    <preference name="MediaPlaybackRequiresUserAction" value="false" />
-    <preference name="SuppressesIncrementalRendering" value="false" />
-    <preference name="TopActivityIndicator" value="gray" />
-    <preference name="GapBetweenPages" value="0" />
-    <preference name="PageLength" value="0" />
-    <preference name="PaginationBreakingMode" value="page" />
-    <preference name="PaginationMode" value="unpaginated" />
-    <preference name="loglevel" value="DEBUG" />
-    <preference name="SplashScreen" value="splash" />
-    <preference name="SplashScreenDelay" value="10000" /> -->
     <preference name="LogLevel" value="ERROR"/>
     <preference name="android-minSdkVersion" value="5" />
     <preference name="orientation" value="both" />
@@ -47,7 +33,6 @@
     <gap:splash src="res2/screen/android/android-xhdpi.png" gap:platform="android" gap:density="xhdpi" />
     <gap:splash src="res2/screen/android/android-xhdpi.png" gap:platform="android" gap:density="xxhdpi" />
 
-
     <gap:platform name="ios" />
     <gap:platform name="android" />
     <description>
@@ -56,10 +41,6 @@
     <author email="marius@medeeaweb.com" href="http://salesassist.eu">
         ArkWeb Team
     </author>
-    <gap:plugin name="org.apache.cordova.camera" />
-    <gap:plugin name="org.apache.cordova.media-capture" />
-    <gap:plugin name="org.apache.cordova.media" />
-    <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <content src="index.html" />

@@ -6,7 +6,7 @@
 		</form>
 	</div>
 	<ul>
-		<li ng-repeat="project in projects | filter:search | limitTo:limit" class="projects" ng-click="edit(project)">
+		<li ng-repeat="project in projects | filter:search | limitTo:limit  track by $index" class="projects" ng-click="edit(project)">
 			<p class="projectName">{{getName(project)}}</p>
 		</li>
 	</ul>
