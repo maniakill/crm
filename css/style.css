@@ -64,7 +64,7 @@ html[xmlns] .clearfix { display: block; }
 					.act .footer_link{ text-shadow: 0px 1px #122433; }
 		.add_wrap { padding: 10px; }
 			.add_ul { border: 1px solid #3a6884; border-radius: 12px; }
-				.add_ul li { line-height: normal; font-size: 17px; font-family:Helvetica; border-bottom: 1px solid #3a6884; cursor: pointer; }
+				.add_ul li { line-height: normal; font-size: 10px; font-family:Helvetica; border-bottom: 1px solid #3a6884; cursor: pointer; }
 				.add_ul .dropdown-menu li { padding: 0; border-bottom: 0px; }
 				.add_ul li.last_li { border-bottom: 0px; }
 				.add_ul li.notes { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -113,6 +113,7 @@ html[xmlns] .clearfix { display: block; }
 .labels, .values{ display: inline-block; }
 .labels{ width: 30%; background: #5998bb; color: #fff; font-weight: bold; text-shadow: 0px -1px #000; cursor:default; padding: 10px 0px 10px; }
 .values{ margin-left: 10px; }
+.ul_header .labels span{ font-size: 17px; }
 .labels span{ padding: 0px 10px; line-height: 21px; }
 .add_ul li:first-child .labels {border-radius: 10px 10px 0 0; width: 100%; }
 .last_li .labels { border-radius: 0px 0px 0px 10px; }
