@@ -35,9 +35,7 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
       project.customer=localStorage.getItem('customer'+localStorage.username) ? JSON.parse(localStorage.getItem('customer'+localStorage.username)) : {};
       project.contactArr = [];
       project.customerArr = [];
-      console.profile('e');
-      project.getContactsAsArr();
-      console.profileEnd();
+      project.getContactsAsArr();      
     }
     init(); 
     var save = function(type, item){
