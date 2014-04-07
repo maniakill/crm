@@ -129,6 +129,9 @@ app.directive('scroller',['project',function(project){
           scope.loadMore();
         }
       })
+       element.on('mousedown', function(event) {
+        console.log('ededew');
+        });
     }  
   }
 }]);
