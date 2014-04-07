@@ -6,7 +6,7 @@
     xmlns:gap = "http://phonegap.com/ns/1.0"
     xmlns:android   = "http://schemas.android.com/apk/res/android"
     >
-    <name>SalesAssist TimeTracker</name>
+    <name>SalesAssist CRM</name>
     <preference name="DisallowOverscroll" value="true" />
     <preference name="LogLevel" value="ERROR"/>
     <preference name="android-minSdkVersion" value="5" />
@@ -36,7 +36,7 @@
     <gap:platform name="ios" />
     <gap:platform name="android" />
     <description>
-        SalesAssist Time Tracker application
+        SalesAssist CRM application
     </description>
     <author email="marius@medeeaweb.com" href="http://salesassist.eu">
         ArkWeb Team
