@@ -132,6 +132,9 @@ ctrl.controller('customers',['$scope','project','$location',
 		$scope.offset = 0;
 		$scope.contacts = 0; 
 		$scope.no_project = false;
+		$scope.handleGesture = function($event) {
+      console.log($event.type)
+    }
 		project.getContacts($scope.offset,'customers_list').then(function(o){
 			$scope.contacts=o.response.max_rows;
 			$scope.offset++;

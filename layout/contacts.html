@@ -1,5 +1,5 @@
 <div ng-include="'layout/header.html'" />
-<div id="page" class="scroller">
+<div id="page" class="scroller"  hm-swipe="handleGesture($event)">
 	<div class="loginForm">
 		<form>
 			<input type="text" ng-model="search" class="account" />

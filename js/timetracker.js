@@ -1,4 +1,4 @@
-var app = angular.module('timeT', ['ngRoute','ctrl','ui.bootstrap']);
+var app = angular.module('timeT', ['ngRoute','ctrl','ui.bootstrap','angular-gestures']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/',{controller: 'start',templateUrl: 'layout/start.html'})
