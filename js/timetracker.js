@@ -125,7 +125,7 @@ app.directive('scroller',['project',function(project){
     link:  function(scope,element,attrs){
       element.bind('scroll',function(){
         console.log(this.scrollTop , this)
-        if(this.scrollTop == this.scrollTopMax){
+        if(this.scrollTop+this.clientHeight == this.scrollHeight){
           scope.loadMore();
         }
       })
