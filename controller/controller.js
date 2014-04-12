@@ -71,8 +71,8 @@ ctrl.controller('footer',['$scope','$routeParams','$route','project','$location'
 	}
 ]);
 // header
-ctrl.controller('header',['$scope','project','$location','$route',
-	function ($scope,project,$location,$route){
+ctrl.controller('header',['$scope','project','$location','$route','$routeParams',
+	function ($scope,project,$location,$route,$routeParams){
 		var path=$route.current.controller,link = 'contacts';
 		$scope.lists = true;
 		switch (path){
@@ -82,6 +82,10 @@ ctrl.controller('header',['$scope','project','$location','$route',
 				break;
 			case 'add':
 				link='contacts';
+				$scope.lists=false;
+			case 'map':
+				link='add/'+$routeParams.id;
+				if($route.current.originalPath.search('mapc') > -1){ link='customerV/'+$routeParams.id; }
 				$scope.lists=false;
 				break;
 		}
@@ -196,6 +200,33 @@ ctrl.controller('customerV',['$scope','$routeParams','project',
 		var contact = project.getItem($routeParams.id,'customer');
 		for(x in contact){
 			$scope[x] = contact[x];
+		}
+	}
+])
+ctrl.controller("map",['$scope','project','$routeParams','$route',
+	function ($scope,project,$routeParams,$route){
+		if($route.current.originalPath.search('mapc') > -1){
+			var contact = project.getItem($routeParams.id,'customer');
+		}else{ var contact = project.getItem($routeParams.id); }		
+		$scope.address = contact.address+','+contact.zip+','+contact.city+','+contact.country;		
+		$scope.loadScript = function () {
+			if(angular.element('#googleAppended').length == 0){
+			  var script = document.createElement('script'), div = document.createElement('div');
+			  script.type = 'text/javascript';
+			  script.src = encodeURI("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=codeAddress");
+			  div.id='googleAppended';
+			  document.body.appendChild(script);
+			  document.body.appendChild(div);
+			}else{ $scope.codeAddress(); }
+		}
+		$scope.codeAddress = function () {
+		  var address = document.getElementById("address").value,geocoder = new google.maps.Geocoder();
+		  geocoder.geocode( { 'address': address}, function(results, status) {
+		    if (status == google.maps.GeocoderStatus.OK) {
+		    	var mapOptions = { zoom: 8, center: new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()) };
+					var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+		    }else{ alert("Geocode was not successful for the following reason: " + status); }
+		  });
 		}
 	}
 ])

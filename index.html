@@ -10,13 +10,11 @@
 		<!-- !css -->
 		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script type="text/javascript" charset="utf-8">
-	    var devReady = false; var	pictureSource; var	destinationType;
+	    var devReady = false
 	    function onLoad() { document.addEventListener("deviceready", onDeviceReady, false); }
-	    function onDeviceReady() { devReady = true; pictureSource=navigator.camera.PictureSourceType; destinationType=navigator.camera.DestinationType;
-	    document.addEventListener("backbutton", exitTheApp, false);
-	    }
+		  function onDeviceReady() { devReady = true;  document.addEventListener("backbutton", exitTheApp, false); }
 	    function exitTheApp(){ navigator.app.exitApp(); }
-	    </script>
+	  </script>
 	</head>
 	<body onload="onLoad()">
 		<div ng-view="" ng-class="pageAnimationClass"></div>
@@ -26,7 +24,7 @@
 		<script src="js/angular.js"></script>
 		<script src="js/angular-route.min.js"></script>
 		<script src="js/angular-animate.min.js"></script>
-		<script src="js/gestures.js"></script>
+		<!-- // <script src="js/gestures.js"></script> -->
 		<script src="js/bootstrap/ui-bootstrap-custom-tpls-0.10.0.js"></script>
 		<script src="js/timetracker.js"></script>
 		<script src="controller/controller.js"></script>

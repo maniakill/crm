@@ -1,0 +1,5 @@
+<div ng-include="'layout/header.html'" />
+<div id="map-canvas" class="scroller" ng-init="loadScript()"><span>Loading map</span></div>
+<input id="address" type="hidden" value="{{address}}">
+<div data-ng-include="'layout/footer.html'" />
+<script type="text/javascript"> function codeAddress() { angular.element('#map-canvas').scope().codeAddress(); } </script>

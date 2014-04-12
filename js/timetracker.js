@@ -1,4 +1,4 @@
-var app = angular.module('timeT', ['ngRoute','ctrl','ui.bootstrap','angular-gestures']);
+var app = angular.module('timeT', ['ngRoute','ctrl','ui.bootstrap']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/',{controller: 'start',templateUrl: 'layout/start.html'})
@@ -10,6 +10,8 @@ app.config(function ($routeProvider) {
         .when('/add/:id',{controller: 'add',templateUrl: 'layout/add.html'})
         .when('/account',{controller: 'account',templateUrl: 'layout/account.html'})
         .when('/customerV/:id',{controller: 'customerV',templateUrl: 'layout/customerView.html'})
+        .when('/map/:id',{controller: 'map',templateUrl: 'layout/map.html'})
+        .when('/mapc/:id',{controller: 'map',templateUrl: 'layout/map.html'})
         .otherwise({ redirectTo: '/' });
 });
 app.factory('project', ['$http','$templateCache','$location','$rootScope','$interval',
