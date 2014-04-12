@@ -72,7 +72,7 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
       }
     }
     project.getContacts = function(off,pag){
-      $rootScope.$broadcast('loading');
+      $rootScope.$broadcast('loadingz');
       var offset = off ? off : 0;
       var list = pag ? pag : 'contacts_list';
       this.data = $http.get(url+'index.php?do=mobile-'+list+'&'+key+'&offset='+offset).then(function(response){

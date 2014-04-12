@@ -129,7 +129,7 @@ ctrl.controller('contacts',['$scope','$location','project','$interval',
 		}
 		$scope.getName=function(item){return item.firstname+' '+item.lastname;}
 		$scope.edit=function(item){ $location.path('/add/'+item.contact_id); }
-		$scope.$on('loading', function() { $scope.loadingMore = true;  });
+		$scope.$on('loadingz', function() { $scope.loadingMore = true;  });
   }
 ]);
 // add
@@ -178,7 +178,7 @@ ctrl.controller('customers',['$scope','project','$location',
 		}
 		$scope.getName=function(item){ return item.name;}
 		$scope.edit=function(item){ $location.path('/customerV/'+item.id); }
-		$scope.$on('loading', function() { $scope.loadingMore = true; });
+		$scope.$on('loadingz', function() { $scope.loadingMore = true; });
 	}
 ])
 // account
