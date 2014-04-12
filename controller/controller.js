@@ -182,7 +182,7 @@ ctrl.controller('account',['$scope','$location','project',
     $scope.username = localStorage.username;
     //deleting the database
     var removeStuff = function (){ localStorage.clear(); }
-    removeStuff();
+    // removeStuff();
     $scope.logout = function (){
       localStorage.setItem('username','');
       localStorage.setItem('token','');
