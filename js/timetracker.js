@@ -17,6 +17,7 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
     var project = {}, url = 'https://go.salesassist.eu/pim/mobile/', key = 'api_key='+localStorage.token+'&username='+localStorage.username, obj = {},search='';
     /* store data */
     project.getContactsAsArr=function(){
+      console.log(project.contact.length, project.contactArr.length);
       project.contactArr.length = 0;
       project.customerArr.length = 0;
       angular.forEach(project.contact,function(value,key){
@@ -42,8 +43,8 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
       if(!localStorage.username){ return false; } if(!type){ return false; } if(!item){ return false; }
       localStorage.setItem(type+localStorage.username, JSON.stringify(item));
     }
-    var saveContact = function(item){
-      if(item.contact_id){
+    var saveContact = function(item){alert('d')
+      if(item.contact_id){alert('ff');
         var contact={};        
         for(x in item){
           contact[x] = item[x];
@@ -77,7 +78,9 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
     project.getContacts = function(off,pag){
       var offset = off ? off : 0;
       var list = pag ? pag : 'contacts_list';
+      alert('a');
       this.data = $http.get(url+'index.php?do=mobile-'+list+'&'+key+'&offset='+offset).then(function(response){
+        alert('b');
         if(response.data.code=='ok'){
           if(typeof(response.data.response.contacts) == 'object' ){
             var contact = response.data.response.contacts;
@@ -94,6 +97,7 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
         if(response.data.code=='error'){ project.logout(response.data); }
         return response.data;
       });
+      alert('c');
       return this.data;
     }
     project.getItem=function(id,type){
@@ -124,7 +128,6 @@ app.directive('scroller',['project',function(project){
     restrict: 'C',
     link:  function(scope,element,attrs){
       element.bind('scroll',function(){
-        console.log(this.scrollTop , this)
         if(this.scrollTop+this.clientHeight == this.scrollHeight){
           scope.loadMore();
         }
