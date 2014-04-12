@@ -17,19 +17,10 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
     var project = {}, url = 'https://go.salesassist.eu/pim/mobile/', key = 'api_key='+localStorage.token+'&username='+localStorage.username, obj = {},search='';
     /* store data */
     project.getContactsAsArr=function(){
-      console.log(project.contact.length, project.contactArr.length);
       project.contactArr.length = 0;
       project.customerArr.length = 0;
-      angular.forEach(project.contact,function(value,key){
-        if(project.contactArr.indexOf(value) == -1){
-          project.contactArr.push(value);
-        }
-      })
-      angular.forEach(project.customer,function(value,key){
-        if(project.customerArr.indexOf(value) == -1){
-          project.customerArr.push(value);
-        }
-      })
+      angular.forEach(project.contact,function(value,key){ project.contactArr.push(value); })
+      angular.forEach(project.customer,function(value,key){ project.customerArr.push(value); })
     }
     var init = function(){
       project.contact=localStorage.getItem('contact'+localStorage.username) ? JSON.parse(localStorage.getItem('contact'+localStorage.username)) : {};
@@ -66,16 +57,20 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
     var saveCustomer=function(item){
       if(item.id){
         var customer={};
-        customer.name=item.name;
-        customer.id=item.id;
-        customer.c_email=item.c_email;
-        customer.comp_phone=item.comp_phone;
+        for(x in item){
+          customer[x] = item[x];
+        }
+        // customer.name=item.name;
+        // customer.id=item.id;
+        // customer.c_email=item.c_email;
+        // customer.comp_phone=item.comp_phone;
         if(!project.customer[item.id]){ project.customer[item.id]={} }
         project.customer[item.id]=customer;
         save('customer',project.customer);
       }
     }
     project.getContacts = function(off,pag){
+      $rootScope.$broadcast('loading');
       var offset = off ? off : 0;
       var list = pag ? pag : 'contacts_list';
       this.data = $http.get(url+'index.php?do=mobile-'+list+'&'+key+'&offset='+offset).then(function(response){
@@ -120,7 +115,7 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
     return project;
   }
 ]);
-app.directive('scroller',['project',function(project){
+app.directive('loadMore',['project',function(project){
   return {
     restrict: 'C',
     link:  function(scope,element,attrs){

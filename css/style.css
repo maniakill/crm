@@ -119,3 +119,4 @@ html[xmlns] .clearfix { display: block; }
 .last_li .labels { border-radius: 0px 0px 0px 10px; }
 .values input { border:hidden; padding: 10px; line-height:21px; width:80%; }
 .second_add_ul {margin-top: 10px; }
+.loadingMore { text-align: center; padding: 15px 10px; }

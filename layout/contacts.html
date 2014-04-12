@@ -1,5 +1,5 @@
 <div ng-include="'layout/header.html'" />
-<div id="page" class="scroller"  hm-swipe="handleGesture($event)">
+<div id="page" class="scroller loadMore"  hm-swipe="handleGesture($event)">
 	<div class="loginForm">
 		<form>
 			<input type="text" ng-model="search" class="account" />
@@ -9,6 +9,7 @@
 		<li ng-repeat="project in projects | filter:search | limitTo:limit  track by $index" class="projects" ng-click="edit(project)">
 			<p class="projectName">{{getName(project)}}</p>
 		</li>
+		<li class="loadingMore" ng-show="loadingMore"><img src="images/ajax-loader.gif" /></li>
 	</ul>
 	<div class="no_data" ng-hide="no_project" >
 		<div class="loginForm">

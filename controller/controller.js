@@ -89,33 +89,42 @@ ctrl.controller('header',['$scope','project','$location','$route',
 	}
 ]);
 // contacts
-ctrl.controller('contacts',['$scope','$location','project',
-  function ($scope,$location,project){
+ctrl.controller('contacts',['$scope','$location','project','$interval',
+  function ($scope,$location,project,$interval){
+  	var loading = false;
 		$scope.projects = project.contactArr;
 		$scope.limit = 30;
 		$scope.offset = 0;
 		$scope.contacts = 0; 
 		$scope.no_project = false;
-		alert(project.contactArr.length);
+		$scope.loadingMore = false;
+		if(project.contactArr.length > 0){ $scope.no_project = true; }
 		project.getContacts().then(function(o){
-			$scope.contacts=o.response.max_rows;
-			$scope.offset++;
-			alert(project.contactArr.length);
-			project.getContactsAsArr();
-			alert(project.contactArr.length);
-			if(project.contactArr.length > 0){ $scope.no_project = true; }
+			if(o.response){
+				$scope.contacts=o.response.max_rows;
+				$scope.offset++;
+				project.getContactsAsArr();
+				if(project.contactArr.length > 0){ $scope.no_project = true; }
+			}
+			$scope.loadingMore = false;
 		})		
 		$scope.loadMore = function(){
-			if($scope.contacts > $scope.limit){
-				$scope.limit += 30;
-			  project.getContacts($scope.offset).then(function(){
-			  	$scope.offset++;
-					project.getContactsAsArr();
-				})
+			if(loading === false){
+				if($scope.contacts > $scope.limit){
+					loading = true;
+					$scope.$apply(function(){$scope.limit += 30;});
+				  project.getContacts($scope.offset).then(function(){
+				  	$scope.offset++;
+						project.getContactsAsArr();
+						$scope.loadingMore = false;
+						loading = false;
+					})
+				}
 			}
 		}
 		$scope.getName=function(item){return item.firstname+' '+item.lastname;}
 		$scope.edit=function(item){ $location.path('/add/'+item.contact_id); }
+		$scope.$on('loading', function() { $scope.loadingMore = true;  });
   }
 ]);
 // add
@@ -130,30 +139,41 @@ ctrl.controller('add',['$scope','project','$location','$routeParams',
 // customers
 ctrl.controller('customers',['$scope','project','$location',
 	function ($scope,project,$location){
+		var loading = false;
 		$scope.projects = project.customerArr;
 		$scope.limit = 30;
 		$scope.offset = 0;
 		$scope.contacts = 0; 
 		$scope.no_project = false;
-		
+		$scope.loadingMore = false;
+		if(project.customerArr.length > 0){ $scope.no_project = true; }
 		project.getContacts($scope.offset,'customers_list').then(function(o){
-			$scope.contacts=o.response.max_rows;
-			$scope.offset++;
-			project.getContactsAsArr();
-			if(project.customerArr.length > 0){ $scope.no_project = true; }
+			if(o.response){
+				$scope.contacts=o.response.max_rows;
+				$scope.offset++;
+				project.getContactsAsArr();
+				if(project.customerArr.length > 0){ $scope.no_project = true; }
+			}
+			$scope.loadingMore = false;
 		})
 		// project.deleteData();
 		$scope.loadMore = function(){
-			if($scope.contacts > $scope.limit){
-				$scope.limit += 30;
-			  project.getContacts($scope.offset,'customers_list').then(function(){
-			  	$scope.offset++;
-					project.getContactsAsArr();
-				})
+			if(loading === false){
+				if($scope.contacts > $scope.limit){
+					loading = true;
+					$scope.$apply(function(){$scope.limit += 30;});
+				  project.getContacts($scope.offset,'customers_list').then(function(){
+				  	$scope.offset++;
+						project.getContactsAsArr();
+						$scope.loadingMore = false;
+						loading = false;
+					})
+				}
 			}
 		}
 		$scope.getName=function(item){ return item.name;}
 		$scope.edit=function(item){ $location.path('/customerV/'+item.id); }
+		$scope.$on('loading', function() { $scope.loadingMore = true; });
 	}
 ])
 // account
@@ -162,7 +182,7 @@ ctrl.controller('account',['$scope','$location','project',
     $scope.username = localStorage.username;
     //deleting the database
     var removeStuff = function (){ localStorage.clear(); }
-    // removeStuff();
+    removeStuff();
     $scope.logout = function (){
       localStorage.setItem('username','');
       localStorage.setItem('token','');
