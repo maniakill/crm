@@ -83,6 +83,7 @@ ctrl.controller('header',['$scope','project','$location','$route','$routeParams'
 			case 'add':
 				link='contacts';
 				$scope.lists=false;
+				break;
 			case 'map':
 				link='add/'+$routeParams.id;
 				if($route.current.originalPath.search('mapc') > -1){ link='customerV/'+$routeParams.id; }
