@@ -103,7 +103,7 @@ ctrl.controller('contacts',['$scope','$location','project',
 			alert(project.contactArr.length);
 			project.getContactsAsArr();
 			alert(project.contactArr.length);
-			if(project.contactArr.length > 0){ $scope.no_project = false; }
+			if(project.contactArr.length > 0){ $scope.no_project = true; }
 		})		
 		$scope.loadMore = function(){
 			if($scope.contacts > $scope.limit){
