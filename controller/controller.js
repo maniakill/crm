@@ -96,11 +96,14 @@ ctrl.controller('contacts',['$scope','$location','project',
 		$scope.offset = 0;
 		$scope.contacts = 0; 
 		$scope.no_project = false;
+		alert(project.contactArr.length);
 		project.getContacts().then(function(o){
 			$scope.contacts=o.response.max_rows;
 			$scope.offset++;
+			alert(project.contactArr.length);
 			project.getContactsAsArr();
-			if(project.contactArr.length > 0){ $scope.no_project = true; }
+			alert(project.contactArr.length);
+			if(project.contactArr.length > 0){ $scope.no_project = false; }
 		})		
 		$scope.loadMore = function(){
 			if($scope.contacts > $scope.limit){
@@ -132,9 +135,7 @@ ctrl.controller('customers',['$scope','project','$location',
 		$scope.offset = 0;
 		$scope.contacts = 0; 
 		$scope.no_project = false;
-		$scope.handleGesture = function($event) {
-      console.log($event.type)
-    }
+		
 		project.getContacts($scope.offset,'customers_list').then(function(o){
 			$scope.contacts=o.response.max_rows;
 			$scope.offset++;

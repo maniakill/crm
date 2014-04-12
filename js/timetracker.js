@@ -43,8 +43,8 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
       if(!localStorage.username){ return false; } if(!type){ return false; } if(!item){ return false; }
       localStorage.setItem(type+localStorage.username, JSON.stringify(item));
     }
-    var saveContact = function(item){alert('d')
-      if(item.contact_id){alert('ff');
+    var saveContact = function(item){
+      if(item.contact_id){
         var contact={};        
         for(x in item){
           contact[x] = item[x];
@@ -78,9 +78,7 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
     project.getContacts = function(off,pag){
       var offset = off ? off : 0;
       var list = pag ? pag : 'contacts_list';
-      alert('a');
       this.data = $http.get(url+'index.php?do=mobile-'+list+'&'+key+'&offset='+offset).then(function(response){
-        alert('b');
         if(response.data.code=='ok'){
           if(typeof(response.data.response.contacts) == 'object' ){
             var contact = response.data.response.contacts;
@@ -97,7 +95,6 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
         if(response.data.code=='error'){ project.logout(response.data); }
         return response.data;
       });
-      alert('c');
       return this.data;
     }
     project.getItem=function(id,type){
