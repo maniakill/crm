@@ -19,5 +19,11 @@
 		<li><div class="labels"><span>City</span></div><div class="values">{{city}}</div></li>
 		<li class="last_li"><div class="labels "><span>Country</span></div><div class="values">{{country}}</div></li>
 	</ul>
+	<ul class="add_ul second_add_ul contacts_ul" ng-show="projects">
+		<li class="ul_header"><div class="labels"><span>Contacts</span></div></li>
+		<li ng-repeat="project in projects" class="projects" ng-click="edit(project)">
+			<p class="projectName">{{getName(project)}}</p>
+		</li>		
+	</ul>
 </div>
 <div data-ng-include="'layout/footer.html'" />

@@ -41,6 +41,9 @@
     <author email="marius@medeeaweb.com" href="http://salesassist.eu">
         ArkWeb Team
     </author>
+    
+    <gap:plugin name="org.apache.cordova.network-information" />
+    <gap:plugin name="org.apache.cordova.geolocation" version="0.3.6" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <content src="index.html" />
