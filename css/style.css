@@ -113,7 +113,7 @@ html[xmlns] .clearfix { display: block; }
 .labels, .values{ display: inline-block; }
 .labels{ width: 30%; background: #5998bb; color: #fff; font-weight: bold; text-shadow: 0px -1px #000; cursor:default; padding: 10px 0px 10px; }
 .labels a { color: #f5f5f5; outline: none; text-decoration: none; }
-.values{ margin-left: 10px; }
+.values{ margin-left: 10px; max-width: 60%; }
 .ul_header .labels span{ font-size: 17px; }
 .labels span{ padding: 0px 10px; line-height: 21px; }
 .add_ul li:first-child .labels {border-radius: 10px 10px 0 0; width: 100%; }

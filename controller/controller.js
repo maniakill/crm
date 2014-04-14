@@ -216,6 +216,7 @@ ctrl.controller('customerV',['$scope','$routeParams','project','$location',
 ctrl.controller("map",['$scope','project','$routeParams','$route',
 	function ($scope,project,$routeParams,$route){
 		var connect = checkConnection();
+		alert(connect);
     if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
 		if($route.current.originalPath.search('mapc') > -1){
 			var contact = project.getItem($routeParams.id,'customer'), name = contact.name;
