@@ -102,7 +102,9 @@ ctrl.controller('contacts',['$scope','$location','project','$interval',
 		$scope.offset = 0;
 		$scope.contacts = 0; 
 		$scope.no_project = false;
-		$scope.loadingMore = false;
+		$scope.loadingMore = false;		
+		$scope.predicate = 'lastname';
+		console.log(project.contact2C);
 		if(project.contactArr.length > 0){ $scope.no_project = true; }
 		project.getContacts().then(function(o){
 			if(o.response){
@@ -127,7 +129,10 @@ ctrl.controller('contacts',['$scope','$location','project','$interval',
 				}
 			}
 		}
-		$scope.getName=function(item){return item.firstname+' '+item.lastname;}
+		$scope.getName=function(item){
+			if(item.company_name){ return item.lastname+' '+item.firstname+' - '+item.company_name; }
+			return item.lastname+' '+item.firstname;
+		}
 		$scope.edit=function(item){ $location.path('/add/'+item.contact_id); }
 		$scope.$on('loadingz', function() { $scope.loadingMore = true;  });
   }
@@ -151,6 +156,7 @@ ctrl.controller('customers',['$scope','project','$location',
 		$scope.contacts = 0; 
 		$scope.no_project = false;
 		$scope.loadingMore = false;
+		$scope.predicate = 'name';
 		if(project.customerArr.length > 0){ $scope.no_project = true; }
 		project.getContacts($scope.offset,'customers_list').then(function(o){
 			if(o.response){
@@ -196,19 +202,24 @@ ctrl.controller('account',['$scope','$location','project',
   }
 ]);
 // customer View
-ctrl.controller('customerV',['$scope','$routeParams','project',
-	function ($scope,$routeParams,project){
+ctrl.controller('customerV',['$scope','$routeParams','project','$location',
+	function ($scope,$routeParams,project,$location){
 		var contact = project.getItem($routeParams.id,'customer');
 		for(x in contact){
 			$scope[x] = contact[x];
 		}
+		$scope.projects = project.getCustomerContacts($routeParams.id);		
+		$scope.getName=function(item){ return item.lastname+' '+item.firstname; }
+		$scope.edit=function(item){ $location.path('/add/'+item.contact_id); }
 	}
 ])
 ctrl.controller("map",['$scope','project','$routeParams','$route',
 	function ($scope,project,$routeParams,$route){
+		var connect = checkConnection();
+    if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
 		if($route.current.originalPath.search('mapc') > -1){
-			var contact = project.getItem($routeParams.id,'customer');
-		}else{ var contact = project.getItem($routeParams.id); }		
+			var contact = project.getItem($routeParams.id,'customer'), name = contact.name;
+		}else{ var contact = project.getItem($routeParams.id), name = contact.lastname+' '+contact.firstname }
 		$scope.address = contact.address+','+contact.zip+','+contact.city+','+contact.country;		
 		$scope.loadScript = function () {
 			if(angular.element('#googleAppended').length == 0){
@@ -224,8 +235,10 @@ ctrl.controller("map",['$scope','project','$routeParams','$route',
 		  var address = document.getElementById("address").value,geocoder = new google.maps.Geocoder();
 		  geocoder.geocode( { 'address': address}, function(results, status) {
 		    if (status == google.maps.GeocoderStatus.OK) {
-		    	var mapOptions = { zoom: 8, center: new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()) };
+		    	var mapOptions = { zoom: 9, center: new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()) };
 					var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+					var myLatLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+					var marker = new google.maps.Marker({ position: myLatLng, map: map, title: name });
 		    }else{ alert("Geocode was not successful for the following reason: " + status); }
 		  });
 		}

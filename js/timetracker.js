@@ -1,3 +1,8 @@
+function checkConnection() {
+    if(devReady === true){ var networkState = navigator.connection.type; }
+    else{ var networkState = 'browser'; }
+    return networkState;
+}
 var app = angular.module('timeT', ['ngRoute','ctrl','ui.bootstrap','angular-gestures']);
 app.config(function ($routeProvider) {
     $routeProvider
@@ -23,10 +28,13 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
       project.customerArr.length = 0;
       angular.forEach(project.contact,function(value,key){ project.contactArr.push(value); })
       angular.forEach(project.customer,function(value,key){ project.customerArr.push(value); })
+      project.contactArr.sort(function(a, b){ return (a.lastname === b.lastname ? 0 : (a.lastname < b.lastname ? -1 : 1)); } );
+      project.customerArr.sort(function(a, b){ return (a.name === b.name ? 0 : (a.name < b.name ? -1 : 1)); } );
     }
     var init = function(){
       project.contact=localStorage.getItem('contact'+localStorage.username) ? JSON.parse(localStorage.getItem('contact'+localStorage.username)) : {};
       project.customer=localStorage.getItem('customer'+localStorage.username) ? JSON.parse(localStorage.getItem('customer'+localStorage.username)) : {};
+      project.contact2C=localStorage.getItem('contact2C'+localStorage.username) ? JSON.parse(localStorage.getItem('contact2C'+localStorage.username)) : {};
       project.contactArr = [];
       project.customerArr = [];
       project.getContactsAsArr();      
@@ -42,14 +50,21 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
         for(x in item){
           contact[x] = item[x];
         }
-        if(contact.company_id!=0 && contact.company_id!=undefined && contact.company_id!='' && !project.customer[contact.company_id]){
-          var c={};
-          c.name=contact.company_name;
-          c.id=contact.company_id;
-          c.comp_phone='';
-          c.c_email='';
-          project.customer[contact.company_id]=c;
-          save('customer',project.customer);
+        if(contact.company_id!=0 && contact.company_id!=undefined && contact.company_id!='' ){
+          if(!project.contact2C[contact.company_id]){ project.contact2C[contact.company_id]=[]; }
+          if(project.contact2C[contact.company_id].indexOf(item.contact_id) == -1){
+            project.contact2C[contact.company_id].push(item.contact_id);
+            save('contact2C',project.contact2C);
+          }          
+          if(!project.customer[contact.company_id]){
+            var c={};
+            c.name=contact.company_name;
+            c.id=contact.company_id;
+            c.comp_phone='';
+            c.c_email='';
+            project.customer[contact.company_id]=c;
+            save('customer',project.customer);
+          }
         }
         if(!project.contact[item.contact_id]){ project.contact[item.contact_id]={}; }
         project.contact[item.contact_id] = contact;
@@ -62,10 +77,6 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
         for(x in item){
           customer[x] = item[x];
         }
-        // customer.name=item.name;
-        // customer.id=item.id;
-        // customer.c_email=item.c_email;
-        // customer.comp_phone=item.comp_phone;
         if(!project.customer[item.id]){ project.customer[item.id]={} }
         project.customer[item.id]=customer;
         save('customer',project.customer);
@@ -104,6 +115,13 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
           break;
         }
       return null;
+    }
+    project.getCustomerContacts=function(id){
+      var contacts = [];
+      if(project.contact2C[id]){
+        angular.forEach(project.contact2C[id],function(value,key){ this.push(project.getItem(value)); },contacts);
+      }
+      return contacts;
     }
     project.logout = function(code){
         if(code.error_code=='authentication required' || code.error_code=='wrong username'){
