@@ -247,9 +247,9 @@ ctrl.controller("map",['$scope','project','$routeParams','$route',
 				    	var request = { origin:myLatLng, destination:destLatLng, travelMode: google.maps.TravelMode.DRIVING };
 						  directionsService.route(request, function(response, status) {
 						  	console.log(response,status);
-						    if (status == google.maps.DirectionsStatus.OK) {alert('e');
+						    if (status == google.maps.DirectionsStatus.OK) {
 						      directionsDisplay.setDirections(response);
-						    }else{ alert(status); }
+						    }else{ alert("Direction sevices was not successful for the following reason: "+status); }
 						  });
 				    }else{ alert("Geocode was not successful for the following reason: " + status); }
 				  });
