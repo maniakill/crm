@@ -1,9 +1,30 @@
 function checkConnection() {
-    if(devReady === true){ var networkState = navigator.connection.type; }
-    else{ var networkState = 'browser'; }
-    return networkState;
+  if(devReady === true){ var networkState = navigator.connection.type; }
+  else{ var networkState = 'browser'; }
+  return networkState;
 }
-var app = angular.module('timeT', ['ngRoute','ctrl','ui.bootstrap','angular-gestures']);
+function getLocation() { navigator.geolocation.getCurrentPosition(onSuccess, onError); }
+function onSuccess(position) { return position.coords.latitude+','+position.coords.longitude; }
+function onError(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+}
+angular.module('fsCordova', [])
+.service('CordovaService', ['$document', '$q',
+  function($document, $q) {
+    var d = $q.defer(), resolved = false; self = this;
+    this.ready = d.promise;
+    document.addEventListener('deviceready', function() {
+      resolved = true;
+      d.resolve(window.cordova);
+    });
+    setTimeout(function() {
+      if (!resolved) {
+        if (window.cordova) d.resolve(window.cordova);
+      }
+    }, 3000);
+}]);
+var app = angular.module('timeT', ['ngRoute','ctrl','ui.bootstrap','angular-gestures','fsCordova']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/',{controller: 'start',templateUrl: 'layout/start.html'})
