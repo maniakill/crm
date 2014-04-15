@@ -241,13 +241,13 @@ ctrl.controller("map",['$scope','project','$routeParams','$route',
 					
 					var geocoder = new google.maps.Geocoder();
 					geocoder.geocode( { 'address': $scope.address }, function(results, status) {
-				    if (status == google.maps.GeocoderStatus.OK) {alert('d');
+				    if (status == google.maps.GeocoderStatus.OK) {
 				    	var destLatLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 				    	var request = { origin:myLatLng, destination:destLatLng, travelMode: google.maps.TravelMode.DRIVING };
 						  directionsService.route(request, function(response, status) {
 						    if (status == google.maps.DirectionsStatus.OK) {alert('e');
 						      directionsDisplay.setDirections(response);
-						    }
+						    }else{ alert(status); }
 						  });
 				    }else{ alert("Geocode was not successful for the following reason: " + status); }
 				  });
