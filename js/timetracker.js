@@ -3,7 +3,7 @@ function checkConnection() {
   else{ var networkState = 'browser'; }
   return networkState;
 }
-function getLocation() { navigator.geolocation.getCurrentPosition(onSuccess, onError); }
+function getLocation() { return navigator.geolocation.getCurrentPosition(onSuccess, onError); }
 function onSuccess(position) { return position.coords.latitude+','+position.coords.longitude; }
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
@@ -24,7 +24,7 @@ angular.module('fsCordova', [])
       }
     }, 3000);
 }]);
-var app = angular.module('timeT', ['ngRoute','ctrl','ui.bootstrap','angular-gestures','fsCordova']);
+var app = angular.module('timeT', ['ngRoute','ctrl','ui.bootstrap','angular-gestures']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/',{controller: 'start',templateUrl: 'layout/start.html'})

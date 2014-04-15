@@ -213,18 +213,9 @@ ctrl.controller('customerV',['$scope','$routeParams','project','$location',
 		$scope.edit=function(item){ $location.path('/add/'+item.contact_id); }
 	}
 ])
-ctrl.controller("map",['$scope','project','$routeParams','$route','CordovaService',
-	function ($scope,project,$routeParams,$route,CordovaService){
-		var connect = 'browser', pos ='';
-		CordovaService.ready.then(function() {
-			alert('d');
-      connect = checkConnection();
-      pos = getLocation();
-      alert(connect);
-    alert(pos);
-    });
-    alert(connect);
-    alert(pos);
+ctrl.controller("map",['$scope','project','$routeParams','$route',
+	function ($scope,project,$routeParams,$route){
+		var connect = checkConnection(), pos = getLocation();
     if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
     else{
 			if($route.current.originalPath.search('mapc') > -1){ var contact = project.getItem($routeParams.id,'customer'), name = contact.name; }
