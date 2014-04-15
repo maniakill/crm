@@ -104,7 +104,6 @@ ctrl.controller('contacts',['$scope','$location','project','$interval',
 		$scope.no_project = false;
 		$scope.loadingMore = false;		
 		$scope.predicate = 'lastname';
-		console.log(project.contact2C);
 		if(project.contactArr.length > 0){ $scope.no_project = true; }
 		project.getContacts().then(function(o){
 			if(o.response){
@@ -215,9 +214,17 @@ ctrl.controller('customerV',['$scope','$routeParams','project','$location',
 ])
 ctrl.controller("map",['$scope','project','$routeParams','$route',
 	function ($scope,project,$routeParams,$route){
-		var connect = checkConnection(), pos = getLocation();
-		alert(pos);
-		console.log(pos);
+		function getLocation() { navigator.geolocation.getCurrentPosition(onSuccess, onError); }
+		getLocation();
+		function onSuccess(position) { 
+			$scope.$apply(function(){
+				$scope.lat = position.coords.latitude;
+				$scope.lng = position.coords.longitude;
+			});
+		}
+		function onError(error) { alert('code: '+error.code+'\nmessage: '+error.message+'\n'); }
+		var connect = checkConnection();		
+		console.log($scope.lat,$scope.lng);
     if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
     else{
 			if($route.current.originalPath.search('mapc') > -1){ var contact = project.getItem($routeParams.id,'customer'), name = contact.name; }
