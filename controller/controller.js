@@ -215,6 +215,7 @@ ctrl.controller('customerV',['$scope','$routeParams','project','$location',
 ctrl.controller("map",['$scope','project','$routeParams','$route',
 	function ($scope,project,$routeParams,$route){
 		getLocation();
+		alert('d');
 		var connect = checkConnection();		
 		console.log(pos);
     if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }

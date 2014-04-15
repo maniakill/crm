@@ -4,8 +4,8 @@ function checkConnection() {
   else{ var networkState = 'browser'; }
   return networkState;
 }
-function getLocation() { if(devReady === true){ alert('d'); navigator.geolocation.getCurrentPosition(onSuccess, onError); } }
-function onSuccess(position) { alert('e'); pos = position.coords.latitude+','+ position.coords.longitude; alert('f'); }
+function getLocation() { if(devReady === true){ navigator.geolocation.getCurrentPosition(onSuccess, onError); } }
+function onSuccess(position) { console.log(position); pos = position.coords.latitude+','+position.coords.longitude; alert(pos); }
 function onError(error) { alert('code: '+error.code+'\nmessage: '+error.message+'\n'); }
 angular.module('fsCordova', [])
 .service('CordovaService', ['$document', '$q',
