@@ -234,6 +234,7 @@ ctrl.controller("map",['$scope','project','$routeParams','$route',
 			$scope.codeAddress = function () {
 				if(pos.length>0){
 					var directionsDisplay = new google.maps.DirectionsRenderer();
+					var directionsService = new google.maps.DirectionsService();
 					var myLatLng = new google.maps.LatLng(pos[0], pos[1]);
 					var mapOptions = { zoom: 9, center: myLatLng };
 					var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
