@@ -233,10 +233,24 @@ ctrl.controller("map",['$scope','project','$routeParams','$route',
 			}
 			$scope.codeAddress = function () {
 				if(pos.length>0){
+					var directionsDisplay = new google.maps.DirectionsRenderer();
 					var mapOptions = { zoom: 9, center: new google.maps.LatLng(pos[0], pos[1]) };
 					var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 					var myLatLng = new google.maps.LatLng(pos[0], pos[1]);
 					var marker = new google.maps.Marker({ position: myLatLng, map: map, title: name });
+					var geocoder = new google.maps.Geocoder();
+					directionsDisplay.setMap(map);
+					geocoder.geocode( { 'address': $scope.address }, function(results, status) {
+				    if (status == google.maps.GeocoderStatus.OK) {
+				    	var destLatLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+				    	var request = { origin:myLatLng, destination:destLatLng, travelMode: google.maps.TravelMode.DRIVING };
+						  directionsService.route(request, function(response, status) {
+						    if (status == google.maps.DirectionsStatus.OK) {
+						      directionsDisplay.setDirections(response);
+						    }
+						  });
+				    }else{ alert("Geocode was not successful for the following reason: " + status); }
+				  });
 				}else{
 				  var geocoder = new google.maps.Geocoder();
 				  geocoder.geocode( { 'address': $scope.address }, function(results, status) {
