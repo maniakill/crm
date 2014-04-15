@@ -215,10 +215,8 @@ ctrl.controller('customerV',['$scope','$routeParams','project','$location',
 ctrl.controller("map",['$scope','project','$routeParams','$route',
 	function ($scope,project,$routeParams,$route){
 		getLocation();
-		alert('d');
 		var connect = checkConnection();		
-		console.log(pos);
-    if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
+		if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
     else{
 			if($route.current.originalPath.search('mapc') > -1){ var contact = project.getItem($routeParams.id,'customer'), name = contact.name; }
 			else{ var contact = project.getItem($routeParams.id), name = contact.lastname+' '+contact.firstname }
@@ -234,15 +232,22 @@ ctrl.controller("map",['$scope','project','$routeParams','$route',
 				}else{ $scope.codeAddress(); }
 			}
 			$scope.codeAddress = function () {
-			  var geocoder = new google.maps.Geocoder();
-			  geocoder.geocode( { 'address': $scope.address }, function(results, status) {
-			    if (status == google.maps.GeocoderStatus.OK) {
-			    	var mapOptions = { zoom: 9, center: new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()) };
-						var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-						var myLatLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-						var marker = new google.maps.Marker({ position: myLatLng, map: map, title: name });
-			    }else{ alert("Geocode was not successful for the following reason: " + status); }
-			  });
+				if(pos.length>0){
+					var mapOptions = { zoom: 9, center: new google.maps.LatLng(pos[0], pos[1]) };
+					var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+					var myLatLng = new google.maps.LatLng(pos[0], pos[1]);
+					var marker = new google.maps.Marker({ position: myLatLng, map: map, title: name });
+				}else{
+				  var geocoder = new google.maps.Geocoder();
+				  geocoder.geocode( { 'address': $scope.address }, function(results, status) {
+				    if (status == google.maps.GeocoderStatus.OK) {
+				    	var mapOptions = { zoom: 9, center: new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()) };
+							var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+							var myLatLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+							var marker = new google.maps.Marker({ position: myLatLng, map: map, title: name });
+				    }else{ alert("Geocode was not successful for the following reason: " + status); }
+				  });
+				}
 			}
 		}
 	}
