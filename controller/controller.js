@@ -217,6 +217,7 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','CordovaServic
 	function ($scope,project,$routeParams,$route,CordovaService){
 		var connect = 'browser', pos ='';
 		CordovaService.ready.then(function() {
+			alert('d');
       connect = checkConnection();
       pos = getLocation;
     });
