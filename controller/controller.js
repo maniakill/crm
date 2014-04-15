@@ -213,7 +213,7 @@ ctrl.controller('customerV',['$scope','$routeParams','project','$location',
 		$scope.edit=function(item){ $location.path('/add/'+item.contact_id); }
 	}
 ])
-ctrl.controller("map",['$scope','project','$routeParams','$route',
+ctrl.controller("map",['$scope','project','$routeParams','$route','CordovaService',
 	function ($scope,project,$routeParams,$route,CordovaService){
 		var connect = 'browser', pos ='';
 		CordovaService.ready.then(function() {
