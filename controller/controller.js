@@ -219,7 +219,9 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','CordovaServic
 		CordovaService.ready.then(function() {
 			alert('d');
       connect = checkConnection();
-      pos = getLocation;
+      pos = getLocation();
+      alert(connect);
+    alert(pos);
     });
     alert(connect);
     alert(pos);
