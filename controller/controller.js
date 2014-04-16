@@ -62,6 +62,16 @@ ctrl.controller('footer',['$scope','$routeParams','$route','project','$location'
 				$scope.accountAct='act';
 				$scope.account=false;
 				break;
+			case 'map':
+				$scope.contactsAct='act';
+				$scope.contacts=false;
+				if($route.current.originalPath.search('mapc') > -1){ 
+					$scope.contactsAct='';
+					$scope.contacts=true;
+					$scope.customersAct='act';
+					$scope.customers=false;
+				}
+				break
 			default: 
 				$scope.contactsAct='act';
 				$scope.contacts=false;
@@ -75,6 +85,7 @@ ctrl.controller('header',['$scope','project','$location','$route','$routeParams'
 	function ($scope,project,$location,$route,$routeParams){
 		var path=$route.current.controller,link = 'contacts';
 		$scope.lists = true;
+		$scope.text = 'List';
 		switch (path){
 			case 'customerV':
 				link='customers';
@@ -85,6 +96,7 @@ ctrl.controller('header',['$scope','project','$location','$route','$routeParams'
 				$scope.lists=false;
 				break;
 			case 'map':
+				$scope.text = 'Back';
 				link='add/'+$routeParams.id;
 				if($route.current.originalPath.search('mapc') > -1){ link='customerV/'+$routeParams.id; }
 				$scope.lists=false;
