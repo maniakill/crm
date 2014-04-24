@@ -1,11 +1,6 @@
 <div ng-include="'layout/header.html'" />
 <div class="add_wrap scroller">
 	<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
-	<!-- <div class="loginForm">
-		<form>
-			<input ng-hide="mode" type="submit" class="submit" value="Save" ng-click="save()">
-		</form>	
-	</div> -->
 	<ul class="add_ul">
 		<li class="ul_header"><div class="labels"><span>Details</span></div></li>
 		<li><div class="labels"><span>First name</span></div><div class="values">{{firstname}}</div></li>
@@ -14,8 +9,7 @@
 		<li><div class="labels"><span>Company</span></div><div class="values"><a href="#/customerV/{{company_id}}">{{company_name}}</a></div></li>
 		<li><div class="labels"><span>Phone</span></div><div class="values"><a href="tel:{{phone}}" target="_blank" >{{phone}} </a></div></li>
 		<li class="last_li"><div class="labels "><span>Email</span></div><div class="values"><a href="mailto:{{email}}" target="_blank" >{{email}}</a></div></li>
-	</ul>
-	
+	</ul>	
 	<ul class="add_ul second_add_ul" ng-show="address_id">
 		<li class="ul_header"><div class="labels"><span>Address - <a href="#/map/{{contact_id}}" ng-show="address_id">View on Google Maps</a></span></div></li>
 		<li><div class="labels"><span></span>Street</div><div class="values">{{address}}</div></li>

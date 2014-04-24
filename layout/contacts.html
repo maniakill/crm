@@ -1,10 +1,6 @@
 <div ng-include="'layout/header.html'" />
 <div id="page" class="scroller loadMore"  hm-swipe="handleGesture($event)">
-	<div class="loginForm">
-		<form>
-			<input type="text" ng-model="search" class="account" placeholder="Search..." />
-		</form>
-	</div>
+	<div class="loginForm"><form><input type="text" ng-model="search" class="account" placeholder="Search..." /></form></div>
 	<ul>
 		<li ng-repeat="project in projects | filter:search | limitTo:limit | orderBy:predicate:false track by $index" class="projects" ng-click="edit(project)">
 			<p class="projectName">{{getName(project)}}</p>
