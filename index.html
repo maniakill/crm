@@ -7,10 +7,10 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script type="text/javascript" charset="utf-8">
-	    var devReady = false
-	    function onLoad() { document.addEventListener("deviceready", onDeviceReady, false); }
-		  function onDeviceReady() { devReady = true;  document.addEventListener("backbutton", exitTheApp, false); }
-	    function exitTheApp(){ navigator.app.exitApp(); }
+	  var devReady = false
+	  function onLoad() { document.addEventListener("deviceready", onDeviceReady, false); }
+		function onDeviceReady() { devReady = true;  document.addEventListener("backbutton", exitTheApp, false); }
+	  function exitTheApp(){ navigator.app.exitApp(); }
 	  </script>
 	</head>
 	<body onload="onLoad()">
