@@ -26,7 +26,7 @@ angular.module('fsCordova', [])
       }
     }, 3000);
 }]);
-var app = angular.module('timeT', ['ngRoute','ctrl','angular-gestures']);
+var app = angular.module('timeT', ['ngRoute','ctrl','angular-gestures','ui.bootstrap']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/',{controller: 'start',templateUrl: 'layout/start.html'})
