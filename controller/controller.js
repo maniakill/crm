@@ -112,7 +112,7 @@ ctrl.controller('contacts',['$scope','$location','project','$interval',
 		$scope.projects = project.contactArr;
 		$scope.limit = 30;
 		$scope.offset = 0;
-		$scope.contacts = 0; 
+		$scope.contacts = project.contactArr.length; 
 		$scope.no_project = false;
 		$scope.loadingMore = false;		
 		$scope.predicate = 'lastname';
@@ -164,7 +164,7 @@ ctrl.controller('customers',['$scope','project','$location',
 		$scope.projects = project.customerArr;
 		$scope.limit = 30;
 		$scope.offset = 0;
-		$scope.contacts = 0; 
+		$scope.contacts = project.customerArr.length; 
 		$scope.no_project = false;
 		$scope.loadingMore = false;
 		$scope.predicate = 'name';
