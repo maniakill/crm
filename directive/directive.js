@@ -1,37 +1,27 @@
-app.animation('.my-crazy-animation', function() {
-return {
+app.animation('.page', function() {
+return {	
 enter: function(element, done) {
-  console.log('enter');
-  // element.css({'right': '-100%' }).removeClass('anim-leave').addClass('anim anim-enter').animate({ right: '0' },1000, done);
-  element.css({'opacity':'0'}).animate({'opacity':'1'},800,done);
-  
-//run the animation here and call done when the animation is complete
-return function(cancelled) {
-  console.log('cancelled');
+	var transitions = ['mb-slide mb-in','mb-slide-up mb-in','mb-slide mb-inl','mb-slide-up mb-inb'],
+			transitions_rev = ['mb-slide mb-in mb-reverse','mb-slide mb-out mb-reverse','mb-slide-up mb-in reverse','mb-slide-up mb-out reverse'],
+			random_nr = (Math.random() * 10) + 1;
+			trans_nr = 0;
 
-//this (optional) function will be called when the animation
-//completes or when the animation is cancelled (the cancelled
-//flag will be set to true if cancelled).
-};
+	if ((random_nr >=2.5) && (random_nr <5)) { trans_nr = 1; }
+	if ((random_nr >=5) && (random_nr <7.5)) { trans_nr = 2; }
+	if (random_nr >=7.5) { trans_nr= 3; }
+
+  element.addClass(transitions[trans_nr]);
+	return function(cancelled) {
+  		element.remove();
+	};
 },
-leave: function(element, done) { console.log('leave'); 
-  // element.removeClass('anim-enter').addClass('anim anim-leave').animate({
-  //       left: '0'
-  //     },1000, done);
-element.css({'opacity':'1'}).animate({'opacity':'0'},500,done);
-          },
-move: function(element, done) { console.log('move'); },
- 
-//animation that can be triggered before the class is added
+leave: function(element, done) { console.log('leave',element); 
+	element.removeClass('mb-slide,mb-slide-up');
+},
+move: function(element, done) { console.log('move');},
 beforeAddClass: function(element, className, done) { console.log('beforeAddClass');},
- 
-//animation that can be triggered after the class is added
 addClass: function(element, className, done) { console.log('addClass'); },
- 
-//animation that can be triggered before the class is removed
 beforeRemoveClass: function(element, className, done) { console.log('beforeRemoveClass'); },
- 
-//animation that can be triggered after the class is removed
 removeClass: function(element, className, done) { console.log('removeClass'); }
 };
 });

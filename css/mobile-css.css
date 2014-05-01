@@ -1,17 +1,18 @@
+
 /* Prefix all pages with mb- for no collisions */
 
 /* Page class for all mobile pages */
 .mb-page {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: none;
 }
 
-/*
-* Slide
-* slide pages horizontally
-*/
+/* 
+ * Slide
+ * slide pages horizontally
+ */
 @-webkit-keyframes slideInFromRight {
   0% { -webkit-transform: translate3d(100%, 0, 0); }
   100% { -webkit-transform: translate3d(0, 0, 0); }
@@ -46,14 +47,19 @@
 }
 
 .mb-slide {
-  -webkit-animation-duration: 0.3s;
+  display: block;
+  -webkit-animation-duration: 1s;
   -webkit-animation-timing-function: ease;
-  animation-duration: 0.3s;
+  animation-duration: 1s;
   animation-timing-function: ease;
 }
 .mb-slide.mb-in {
   -webkit-animation-name: slideInFromRight;
   animation-name: slideInFromRight;
+}
+.mb-slide.mb-inl {
+  -webkit-animation-name: slideInFromLeft;
+  animation-name: slideInFromLeft;
 }
 .mb-slide.mb-in.mb-reverse {
   -webkit-animation-name: slideOutToRight;
@@ -73,8 +79,8 @@
 }
 
 /*
-* Slide up and down - like modal, but exiting page is animated too.
-*/
+ * Slide up and down - like modal, but exiting page is animated too.
+ */
 
 @-webkit-keyframes slideInFromTop {
   0% { -webkit-transform: translate3d(0, 100%, 0); }
@@ -110,14 +116,19 @@
 }
 
 .mb-slide-up {
-  -webkit-animation-duration: 0.3s;
+  display: block;
+  -webkit-animation-duration: 1s;
   -webkit-animation-timing-function: ease;
-  animation-duration: 0.3s;
+  animation-duration: 1s;
   animation-timing-function: ease;
 }
 .mb-slide-up.mb-in {
   -webkit-animation-name: slideInFromTop;
   animation-name: slideInFromTop;
+}
+.mb-slide-up.mb-inb {
+  -webkit-animation-name: slideInFromBottom;
+  animation-name: slideInFromBottom;
 }
 .mb-slide-up.mb-in.reverse {
   -webkit-animation-name: slideOutToTop;
@@ -138,9 +149,9 @@
 
 
 /*
-* Modal!
-* slide a page in from the bottom onto a page
-*/
+ * Modal!
+ * slide a page in from the bottom onto a page
+ */
 @-webkit-keyframes modalUp {
   0% { -webkit-transform: translate3d(0, 100%, 0); }
   100% { -webkit-transform: translate3d(0, 0, 0); }
@@ -175,3 +186,4 @@
   animation-name: modalDown;
   transform: translate3d(0, 100%, 0);
 }
+
