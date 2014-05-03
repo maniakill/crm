@@ -26,21 +26,21 @@ angular.module('fsCordova', [])
       }
     }, 3000);
 }]);
-var app = angular.module('timeT', ['ngRoute','ctrl','angular-gestures','ui.bootstrap','ngAnimate']);
+var app = angular.module('timeT', ['ngRoute','ctrl','angular-gestures','ui.bootstrap']);
 app.config(function ($routeProvider) {
-    $routeProvider
-        .when('/',{controller: 'start',templateUrl: 'layout/start.html'})
-        .when('/login',{controller: 'login',templateUrl: 'layout/login.html'})
-        .when('/login/:error',{controller: 'login',templateUrl: 'layout/login.html'})
-        .when('/contacts',{controller: 'contacts',templateUrl: 'layout/contacts.html'})
-        .when('/customers',{controller: 'customers',templateUrl: 'layout/contacts.html'})
-        .when('/add',{controller: 'add',templateUrl: 'layout/add.html'})
-        .when('/add/:id',{controller: 'add',templateUrl: 'layout/add.html'})
-        .when('/account',{controller: 'account',templateUrl: 'layout/account.html'})
-        .when('/customerV/:id',{controller: 'customerV',templateUrl: 'layout/customerView.html'})
-        .when('/map/:id',{controller: 'map',templateUrl: 'layout/map.html'})
-        .when('/mapc/:id',{controller: 'map',templateUrl: 'layout/map.html'})
-        .otherwise({ redirectTo: '/' });
+  $routeProvider
+    .when('/',{controller: 'start',templateUrl: 'layout/start.html'})
+    .when('/login',{controller: 'login',templateUrl: 'layout/login.html'})
+    .when('/login/:error',{controller: 'login',templateUrl: 'layout/login.html'})
+    .when('/contacts',{controller: 'contacts',templateUrl: 'layout/contacts.html'})
+    .when('/customers',{controller: 'customers',templateUrl: 'layout/contacts.html'})
+    .when('/add',{controller: 'add',templateUrl: 'layout/add.html'})
+    .when('/add/:id',{controller: 'add',templateUrl: 'layout/add.html'})
+    .when('/account',{controller: 'account',templateUrl: 'layout/account.html'})
+    .when('/customerV/:id',{controller: 'customerV',templateUrl: 'layout/customerView.html'})
+    .when('/map/:id',{controller: 'map',templateUrl: 'layout/map.html'})
+    .when('/mapc/:id',{controller: 'map',templateUrl: 'layout/map.html'})
+    .otherwise({ redirectTo: '/' });
 });
 app.factory('project', ['$http','$templateCache','$location','$rootScope','$interval',
   function ($http,$templateCache,$location,$rootScope,$interval) {
