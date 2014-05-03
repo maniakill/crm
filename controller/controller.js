@@ -140,10 +140,7 @@ ctrl.controller('contacts',['$scope','$location','project','$interval',
 				}
 			}
 		}
-		$scope.getName=function(item){
-			if(item.company_name){ return item.lastname+' '+item.firstname+' - '+item.company_name; }
-			return item.lastname+' '+item.firstname;
-		}
+		$scope.getName=function(item){ return item.lastname+' '+item.firstname; }
 		$scope.edit=function(item){ $location.path('/add/'+item.contact_id); }
 		$scope.$on('loadingz', function() { $scope.loadingMore = true;  });
   }

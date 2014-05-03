@@ -37,7 +37,7 @@ html[xmlns] .clearfix { display: block; }
 			#classSpan, #classSpan1 { font-size: 20px; color: #ffffff; font-family:Helvetica; background: none; border: 0px; box-shadow: 0 0px 0px; cursor: default; padding: 0px 0px 0px; margin: 0px; width: 180px; border-radius: 0px; vertical-align: middle; height: 20px; }
 			#classSpan1 { color: #000000; margin-top: 4px; }
 		.projects { border-bottom: 1px solid #e6e6e6;  background: url("../images/line-bg.png") repeat-x scroll left bottom rgba(0, 0, 0, 0); }
-		.projectName{ font-family:Helvetica; font-size: 16px; padding: 9px 10px 8px; /*border-bottom: 1px solid #e6e6e6; */color: #000000; cursor: pointer; }
+		.projectName{ font-family:Helvetica; font-size: 14px; padding: 9px 10px 8px; /*border-bottom: 1px solid #e6e6e6; */color: #000000; cursor: pointer; }
 		.taskDetail{ padding: 9px 10px 8px; /*border-bottom: 1px solid #e6e6e6;*/ cursor: pointer; /*background: url('../images/line-bg.png') repeat-x left bottom;*/ }
 		/*.taskDetail:active{  background: -webkit-linear-gradient(#E6E6E6, #ffffff);  background: -o-linear-gradient(#E6E6E6, #ffffff);  background: -moz-linear-gradient(#E6E6E6, #ffffff);  background: linear-gradient(#E6E6E6, #ffffff); }*/
 			.taskDetail .taskName{ font-family:Helvetica; font-size: 16px; color: #666666; }
@@ -109,3 +109,4 @@ html[xmlns] .clearfix { display: block; }
 #map-canvas { height: auto; width:100%; text-align: center; font-size: 14px; font-weight: bold; position: absolute !important; top: 59px; bottom: 50px; }
 #map-canvas span { display: inline-block; padding: 30px 10px; }
 .contacts_ul { border-radius: 12px 12px 0 0; border-bottom: hidden; }
+.cname { font-style: italic; display: block; color: #676767; }

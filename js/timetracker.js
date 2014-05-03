@@ -109,23 +109,27 @@ app.factory('project', ['$http','$templateCache','$location','$rootScope','$inte
       $rootScope.$broadcast('loadingz');
       var offset = off ? off : 0;
       var list = pag ? pag : 'contacts_list';
-      this.data = $http.get(url+'index.php?do=mobile-'+list+'&'+key+'&offset='+offset).then(function(response){
-        if(response.data.code=='ok'){
-          if(typeof(response.data.response.contacts) == 'object' ){
-            var contact = response.data.response.contacts;
-            angular.forEach(contact, function(value, key){
-              saveContact(value);
-            });
-          }else if(typeof(response.data.response.customers) == 'object'){
-            var customer = response.data.response.customers;
-            angular.forEach(customer,function(value,key){
-              saveCustomer(value);
-            })
+      var connect = checkConnection();    
+      if(connect == 'none' && connect =='unknown'){ this.data = []; }
+      else{
+        this.data = $http.get(url+'index.php?do=mobile-'+list+'&'+key+'&offset='+offset).then(function(response){
+          if(response.data.code=='ok'){
+            if(typeof(response.data.response.contacts) == 'object' ){
+              var contact = response.data.response.contacts;
+              angular.forEach(contact, function(value, key){
+                saveContact(value);
+              });
+            }else if(typeof(response.data.response.customers) == 'object'){
+              var customer = response.data.response.customers;
+              angular.forEach(customer,function(value,key){
+                saveCustomer(value);
+              })
+            }
           }
-        }
-        if(response.data.code=='error'){ project.logout(response.data); }
-        return response.data;
-      });
+          if(response.data.code=='error'){ project.logout(response.data); }
+          return response.data;
+        });
+      }
       return this.data;
     }
     project.getItem=function(id,type){
@@ -163,7 +167,7 @@ app.directive('loadMore',['project',function(project){
     restrict: 'C',
     link:  function(scope,element,attrs){
       element.bind('scroll',function(){
-        if(this.scrollTop+this.clientHeight == this.scrollHeight){
+        if(this.scrollTop+this.clientHeight > this.scrollHeight-300){
           scope.loadMore();
         }
       })
