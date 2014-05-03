@@ -167,7 +167,7 @@ app.directive('loadMore',['project',function(project){
     restrict: 'C',
     link:  function(scope,element,attrs){
       element.bind('scroll',function(){
-        if(this.scrollTop+this.clientHeight > this.scrollHeight-300){
+        if(this.scrollTop+this.clientHeight > this.scrollHeight-400){
           scope.loadMore();
         }
       })
