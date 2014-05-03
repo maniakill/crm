@@ -4,7 +4,9 @@ function checkConnection() {
   else{ var networkState = 'browser'; }
   return networkState;
 }
-function getLocation() { if(devReady === true){ navigator.geolocation.getCurrentPosition(onSuccess, onError); } }
+function getLocation() { if(devReady === true){ 
+  var opt = { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true };
+  navigator.geolocation.getCurrentPosition(onSuccess, onError, opt); } }
 function onSuccess(position) { 
   alert('pos');
   pos.length = 0;
