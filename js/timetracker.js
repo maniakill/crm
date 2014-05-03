@@ -6,6 +6,7 @@ function checkConnection() {
 }
 function getLocation() { if(devReady === true){ navigator.geolocation.getCurrentPosition(onSuccess, onError); } }
 function onSuccess(position) { 
+  alert('pos');
   pos.length = 0;
   pos.push(position.coords.latitude);
   pos.push(position.coords.longitude);
