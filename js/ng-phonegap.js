@@ -30,7 +30,7 @@ factory('phonegapReady', function ($rootScope) {
 angular.module('appgeolocation',['appready']).
 factory('geolocation', function ($rootScope, phonegapReady) {
   return {
-    getCurrentPosition: phonegapReady(function (onSuccess, onError, options) {
+    getCurrentPosition: phonegapReady(function (onSuccess, onError, options) { 
       navigator.geolocation.getCurrentPosition(function () {
         var that = this, args = arguments;
         if (onSuccess) {
