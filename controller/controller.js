@@ -223,66 +223,66 @@ ctrl.controller('customerV',['$scope','$routeParams','project','$location',
 ])
 ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 	function ($scope,project,$routeParams,$route,geolocation){
-		geolocation.getCurrentPosition(function (position) {
-    alert('Latitude: '              + position.coords.latitude          + '\n' +
-          'Longitude: '             + position.coords.longitude         + '\n' +
-          'Altitude: '              + position.coords.altitude          + '\n' +
-          'Accuracy: '              + position.coords.accuracy          + '\n' +
-          'Altitude Accuracy: '     + position.coords.altitudeAccuracy  + '\n' +
-          'Heading: '               + position.coords.heading           + '\n' +
-          'Speed: '                 + position.coords.speed             + '\n' +
-          'Timestamp: '             + position.timestamp                + '\n');
-  });
-		// getLocation();
-		// var connect = checkConnection();		
-		// if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
-  //   else{
-		// 	if($route.current.originalPath.search('mapc') > -1){ var contact = project.getItem($routeParams.id,'customer'), name = contact.name; }
-		// 	else{ var contact = project.getItem($routeParams.id), name = contact.lastname+' '+contact.firstname }
-		// 	$scope.address = contact.address+','+contact.city+','+contact.zip+','+contact.country;		
-		// 	$scope.loadScript = function () {
-		// 		if(angular.element('#googleAppended').length == 0){
-		// 		  var script = document.createElement('script'), div = document.createElement('div');
-		// 		  script.type = 'text/javascript';
-		// 		  script.src = encodeURI("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=codeAddress");
-		// 		  div.id='googleAppended';
-		// 		  document.body.appendChild(script);
-		// 		  document.body.appendChild(div);
-		// 		}else{ $scope.codeAddress(); }
-		// 	}
-		// 	$scope.codeAddress = function () {
-		// 		if(pos.length>0){
-		// 			var directionsDisplay = new google.maps.DirectionsRenderer();
-		// 			var directionsService = new google.maps.DirectionsService();
-		// 			var myLatLng = new google.maps.LatLng(pos[0], pos[1]);
-		// 			var mapOptions = { zoom: 9, center: myLatLng };
-		// 			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		// 			directionsDisplay.setMap(map);
-					
-		// 			var geocoder = new google.maps.Geocoder();
-		// 			geocoder.geocode( { 'address': $scope.address }, function(results, status) {
-		// 		    if (status == google.maps.GeocoderStatus.OK) {
-		// 		    	var destLatLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-		// 		    	var request = { origin:myLatLng, destination:destLatLng, travelMode: google.maps.TravelMode.DRIVING };
-		// 				  directionsService.route(request, function(response, status) {
-		// 				  	if (status == google.maps.DirectionsStatus.OK) {
-		// 				      directionsDisplay.setDirections(response);
-		// 				    }else{ alert("Direction sevices was not successful for the following reason: "+status); }
-		// 				  });
-		// 		    }else{ alert("Geocode was not successful for the following reason: " + status); }
-		// 		  });
-		// 		}else{
-		// 		  var geocoder = new google.maps.Geocoder();
-		// 		  geocoder.geocode( { 'address': $scope.address }, function(results, status) {
-		// 		    if (status == google.maps.GeocoderStatus.OK) {
-		// 		    	var mapOptions = { zoom: 9, center: new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()) };
-		// 					var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		// 					var myLatLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-		// 					var marker = new google.maps.Marker({ position: myLatLng, map: map, title: name });
-		// 		    }else{ alert("Geocode was not successful for the following reason: " + status); }
-		// 		  });
-		// 		}
-		// 	}
-		// }
+		var opt = { maximumAge: 6000, timeout: 25000, enableHighAccuracy: false };
+		$scope.pos = [];
+		geolocation.getCurrentPosition(function (position,error, opt) {
+			if(error){ alert('code: '+error.code+'\nmessage: '+error.message+'\n'); }
+			else{
+				$scope.pos = [];
+				$scope.pos.length = 0;
+	  		$scope.pos.push(position.coords.latitude);
+	  		$scope.pos.push(position.coords.longitude);
+	  		$scope.codeAddress();
+	  	}
+    });
+		var connect = checkConnection();		
+		if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
+    else{
+			if($route.current.originalPath.search('mapc') > -1){ var contact = project.getItem($routeParams.id,'customer'), name = contact.name; }
+			else{ var contact = project.getItem($routeParams.id), name = contact.lastname+' '+contact.firstname }
+			$scope.address = contact.address+','+contact.city+','+contact.zip+','+contact.country;		
+			$scope.loadScript = function () {
+				if(angular.element('#googleAppended').length == 0){
+				  var script = document.createElement('script'), div = document.createElement('div');
+				  script.type = 'text/javascript';
+				  script.src = encodeURI("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=codeAddress");
+				  div.id='googleAppended';
+				  document.body.appendChild(script);
+				  document.body.appendChild(div);
+				}else{ $scope.codeAddress(); }
+			}
+			$scope.codeAddress = function () {
+				if($scope.pos.length>0){alert('e');
+					var directionsDisplay = new google.maps.DirectionsRenderer();
+					var directionsService = new google.maps.DirectionsService();
+					var myLatLng = new google.maps.LatLng(pos[0], pos[1]);
+					var mapOptions = { zoom: 9, center: myLatLng };
+					var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+					directionsDisplay.setMap(map);					
+					var geocoder = new google.maps.Geocoder();
+					geocoder.geocode( { 'address': $scope.address }, function(results, status) {
+				    if (status == google.maps.GeocoderStatus.OK) {
+				    	var destLatLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+				    	var request = { origin:myLatLng, destination:destLatLng, travelMode: google.maps.TravelMode.DRIVING };
+						  directionsService.route(request, function(response, status) {
+						  	if (status == google.maps.DirectionsStatus.OK) {
+						      directionsDisplay.setDirections(response);
+						    }else{ alert("Direction sevices was not successful for the following reason: "+status); }
+						  });
+				    }else{ alert("Geocode was not successful for the following reason: " + status); }
+				  });
+				}else{
+				  var geocoder = new google.maps.Geocoder();
+				  geocoder.geocode( { 'address': $scope.address }, function(results, status) {
+				    if (status == google.maps.GeocoderStatus.OK) {
+				    	var mapOptions = { zoom: 9, center: new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()) };
+							var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+							var myLatLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+							var marker = new google.maps.Marker({ position: myLatLng, map: map, title: name });
+				    }else{ alert("Geocode was not successful for the following reason: " + status); }
+				  });
+				}
+			}
+		}
 	}
 ])

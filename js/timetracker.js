@@ -1,19 +1,19 @@
-var pos=[]; 
+// var pos=[]; 
 function checkConnection() {
   if(devReady === true){ var networkState = navigator.connection.type; }
   else{ var networkState = 'browser'; }
   return networkState;
 }
-function getLocation() { if(devReady === true){ 
-  var opt = { maximumAge: 6000, timeout: 15000, enableHighAccuracy: false };
-  navigator.geolocation.getCurrentPosition(onSuccess, onError, opt); } }
-function onSuccess(position) { 
-  alert('pos');
-  pos.length = 0;
-  pos.push(position.coords.latitude);
-  pos.push(position.coords.longitude);
-}
-function onError(error) { alert('code: '+error.code+'\nmessage: '+error.message+'\n'); }
+// function getLocation() { if(devReady === true){ 
+//   var opt = { maximumAge: 6000, timeout: 15000, enableHighAccuracy: false };
+//   navigator.geolocation.getCurrentPosition(onSuccess, onError, opt); } }
+// function onSuccess(position) { 
+//   alert('pos');
+//   pos.length = 0;
+//   pos.push(position.coords.latitude);
+//   pos.push(position.coords.longitude);
+// }
+// function onError(error) { alert('code: '+error.code+'\nmessage: '+error.message+'\n'); }
 angular.module('fsCordova', [])
 .service('CordovaService', ['$document', '$q',
   function($document, $q) {
