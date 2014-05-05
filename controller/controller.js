@@ -223,7 +223,7 @@ ctrl.controller('customerV',['$scope','$routeParams','project','$location',
 ])
 ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 	function ($scope,project,$routeParams,$route,geolocation){
-		var opt = { maximumAge: 5000, timeout: 15000, enableHighAccuracy: false };
+		var opt = { maximumAge: 3000, timeout: 5000, enableHighAccuracy: false };
 		$scope.pos = [];		
 		var connect = checkConnection();		
 		if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
@@ -275,7 +275,7 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 			}
 		}
 
-		if(!geolocation.getCurrentPosition(function (position,error, opt) {
+		geolocation.getCurrentPosition(function (position,error, opt) {
 			if(error){ alert('error'); $scope.loadScript();  }
 			else{
 				$scope.pos = [];
@@ -285,8 +285,10 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 	  		alert('position')
 	  		$scope.loadScript();
 	  	}
-    })){ 
-			alert('no geo');
-			$scope.loadScript(); }
+    })
+
+    $timeout(function() { if($scope.pos.length==0){ alert('no geo')
+	  		$scope.loadScript(); } }, 5000);
+
 	}
 ])
