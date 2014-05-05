@@ -5,7 +5,7 @@ function checkConnection() {
   return networkState;
 }
 function getLocation() { if(devReady === true){ 
-  var opt = { maximumAge: 6000, timeout: 15000, enableHighAccuracy: true };
+  var opt = { maximumAge: 6000, timeout: 15000, enableHighAccuracy: false };
   navigator.geolocation.getCurrentPosition(onSuccess, onError, opt); } }
 function onSuccess(position) { 
   alert('pos');
