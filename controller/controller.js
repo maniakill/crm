@@ -243,15 +243,15 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 			if($route.current.originalPath.search('mapc') > -1){ var contact = project.getItem($routeParams.id,'customer'), name = contact.name; }
 			else{ var contact = project.getItem($routeParams.id), name = contact.lastname+' '+contact.firstname }
 			$scope.address = contact.address+','+contact.city+','+contact.zip+','+contact.country;		
-			$scope.loadScript = function () {
-				if(angular.element('#googleAppended').length == 0){
+			$scope.loadScript = function () {alert('ma-ta');
+				if(angular.element('#googleAppended').length == 0){alert('ma-ta2');
 				  var script = document.createElement('script'), div = document.createElement('div');
 				  script.type = 'text/javascript';
 				  script.src = encodeURI("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=codeAddress");
 				  div.id='googleAppended';
 				  document.body.appendChild(script);
 				  document.body.appendChild(div);
-				}else{ $scope.codeAddress(); }
+				}else{ $scope.codeAddress();alert('ma-ta3'); }
 			}
 			$scope.codeAddress = function () {
 				if($scope.pos.length>0){alert('e');
