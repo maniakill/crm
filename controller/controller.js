@@ -226,13 +226,13 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 		var opt = { maximumAge: 6000, timeout: 25000, enableHighAccuracy: false };
 		$scope.pos = [];
 		geolocation.getCurrentPosition(function (position,error, opt) {
-			if(error){ alert('code: '+error.code+'\nmessage: '+error.message+'\n'); }
+			if(error){ $scope.loadScript(); }
 			else{
 				$scope.pos = [];
 				$scope.pos.length = 0;
 	  		$scope.pos.push(position.coords.latitude);
 	  		$scope.pos.push(position.coords.longitude);
-	  		$scope.codeAddress();
+	  		$scope.loadScript();
 	  	}
     });
 		var connect = checkConnection();		
@@ -271,7 +271,7 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 						  });
 				    }else{ alert("Geocode was not successful for the following reason: " + status); }
 				  });
-				}else{
+				}else{alert('f');
 				  var geocoder = new google.maps.Geocoder();
 				  geocoder.geocode( { 'address': $scope.address }, function(results, status) {
 				    if (status == google.maps.GeocoderStatus.OK) {
