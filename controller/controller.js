@@ -257,7 +257,7 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 				if($scope.pos.length>0){alert('e');
 					var directionsDisplay = new google.maps.DirectionsRenderer();
 					var directionsService = new google.maps.DirectionsService();
-					var myLatLng = new google.maps.LatLng(pos[0], pos[1]);
+					var myLatLng = new google.maps.LatLng($scope.pos[0], $scope.pos[1]);
 					var mapOptions = { zoom: 9, center: myLatLng };
 					var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 					directionsDisplay.setMap(map);					
