@@ -223,7 +223,7 @@ ctrl.controller('customerV',['$scope','$routeParams','project','$location',
 ])
 ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 	function ($scope,project,$routeParams,$route,geolocation){
-		var opt = { maximumAge: 1000, timeout: 1000, enableHighAccuracy: false };
+		var opt = { maximumAge: 5000, timeout: 15000, enableHighAccuracy: false };
 		$scope.pos = [];		
 		var connect = checkConnection();		
 		if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
