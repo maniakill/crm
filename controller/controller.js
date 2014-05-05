@@ -276,14 +276,17 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 		}
 
 		if(!geolocation.getCurrentPosition(function (position,error, opt) {
-			if(error){ $scope.loadScript(); }
+			if(error){ alert('error'); $scope.loadScript();  }
 			else{
 				$scope.pos = [];
 				$scope.pos.length = 0;
 	  		$scope.pos.push(position.coords.latitude);
 	  		$scope.pos.push(position.coords.longitude);
+	  		alert('position')
 	  		$scope.loadScript();
 	  	}
-    })){ $scope.loadScript(); }
+    })){ 
+			alert('no geo');
+			$scope.loadScript(); }
 	}
 ])
