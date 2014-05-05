@@ -29,7 +29,7 @@ angular.module('fsCordova', [])
       }
     }, 3000);
 }]);
-var app = angular.module('timeT', ['ngRoute','ctrl','angular-gestures','ui.bootstrap']);
+var app = angular.module('timeT', ['ngRoute','ctrl','angular-gestures','ui.bootstrap','appready','appgeolocation']);
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/',{controller: 'start',templateUrl: 'layout/start.html'})

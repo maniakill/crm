@@ -4,7 +4,7 @@
  * License: MIT
  */
 'use strict';
-angular.module('btford.phonegap.ready', []).
+angular.module('appready', []).
 factory('phonegapReady', function ($rootScope) {
   return function (fn) {
     var queue = [];
@@ -27,7 +27,7 @@ factory('phonegapReady', function ($rootScope) {
  * (c) 2013 Brian Ford http://briantford.com
  * License: MIT
  */
-angular.module('btford.phonegap.geolocation',['btford.phonegap.ready']).
+angular.module('appgeolocation',['appready']).
 factory('geolocation', function ($rootScope, phonegapReady) {
   return {
     getCurrentPosition: phonegapReady(function (onSuccess, onError, options) {
