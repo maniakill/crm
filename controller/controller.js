@@ -235,7 +235,7 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 	  		$scope.loadScript();
 	  	}
     });
-    $timeout(function() { if($scope.pos.length==0){ $scope.loadScript(); } }, 10000);
+    $timeout(function() { if($scope.pos.length==0){ $scope.loadScript(); } }, 11000);
 		var connect = checkConnection();		
 		if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
     else{
