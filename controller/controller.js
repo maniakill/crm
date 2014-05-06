@@ -232,29 +232,28 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 				$scope.pos.length = 0;
 	  		$scope.pos.push(position.coords.latitude);
 	  		$scope.pos.push(position.coords.longitude);
-	  		alert('position')
 	  		$scope.loadScript();
 	  	}
     });
-    $timeout(function() { if($scope.pos.length==0){ alert('no geo2'); $scope.loadScript(); } }, 5000);
+    $timeout(function() { if($scope.pos.length==0){ $scope.loadScript(); } }, 5000);
 		var connect = checkConnection();		
 		if(connect == 'none' && connect =='unknown'){ angular.element('#map-canvas span').text('No internet connection'); }
     else{
 			if($route.current.originalPath.search('mapc') > -1){ var contact = project.getItem($routeParams.id,'customer'), name = contact.name; }
 			else{ var contact = project.getItem($routeParams.id), name = contact.lastname+' '+contact.firstname }
 			$scope.address = contact.address+','+contact.city+','+contact.zip+','+contact.country;		
-			$scope.loadScript = function () {alert('ma-ta');
-				if(angular.element('#googleAppended').length == 0){alert('ma-ta2');
+			$scope.loadScript = function () {
+				if(angular.element('#googleAppended').length == 0){
 				  var script = document.createElement('script'), div = document.createElement('div');
 				  script.type = 'text/javascript';
 				  script.src = encodeURI("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=codeAddress");
 				  div.id='googleAppended';
 				  document.body.appendChild(script);
 				  document.body.appendChild(div);
-				}else{ $scope.codeAddress();alert('ma-ta3'); }
+				}else{ $scope.codeAddress(); }
 			}
 			$scope.codeAddress = function () {
-				if($scope.pos.length>0){alert('e');
+				if($scope.pos.length>0){
 					var directionsDisplay = new google.maps.DirectionsRenderer();
 					var directionsService = new google.maps.DirectionsService();
 					var myLatLng = new google.maps.LatLng($scope.pos[0], $scope.pos[1]);
@@ -273,7 +272,7 @@ ctrl.controller("map",['$scope','project','$routeParams','$route','geolocation',
 						  });
 				    }else{ alert("Geocode was not successful for the following reason: " + status); }
 				  });
-				}else{alert('f');
+				}else{
 				  var geocoder = new google.maps.Geocoder();
 				  geocoder.geocode( { 'address': $scope.address }, function(results, status) {
 				    if (status == google.maps.GeocoderStatus.OK) {
